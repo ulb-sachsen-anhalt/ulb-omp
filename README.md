@@ -16,6 +16,6 @@ Server+DB: https://omp.bibliothek.uni-halle.de
 - visit: https://git.itz.uni-halle.de/ulb/ulb-ojs/-/settings/ci_cd
 
 - sudo gitlab-runner register (URL / Token im ULB Gitlab kopieren)
-    tags --> ulb-ojs
+    tags --> ulb-ojs,
     executer --> shell
     
