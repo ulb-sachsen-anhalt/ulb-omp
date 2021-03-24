@@ -1,5 +1,5 @@
 # This file is a template, and might need editing before it works on your project.
-FROM FROM php:7.3-apache
+FROM php:7.3-apache
 
 RUN apt-get update && apt-get install -y\
     php-cli unzip
