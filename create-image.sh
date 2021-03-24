@@ -10,4 +10,5 @@ docker build --no-cache \
     -f ${DOCKER_CONF} .
 
 
+docker container stop containertest
 docker run -dit --rm --name containertest -p 8080:80 ${IMAGE}
