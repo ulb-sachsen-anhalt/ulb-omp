@@ -1,3 +1,0 @@
-[submodule "omp"]
-	path = omp
-	url = https://github.com/pkp/omp.git
