@@ -11,7 +11,7 @@
 ; Copyright (c) 2003-2021 John Willinsky
 ; Distributed under the GNU GPL v3. For full terms see the file docs/COPYING.
 ;
-; OJS Configuration settings.
+; OMP Configuration settings.
 ; Rename config.TEMPLATE.inc.php to config.inc.php to use.
 ;
 ;
@@ -26,20 +26,17 @@
 
 ; Set this to On once the system has been installed
 ; (This is generally done automatically by the installer)
-; ULB Info hier muss eingegriffen werden, wenn die DB installiert ist!
-; TODO: sonst startet immer wieder die Installroutine   
 ;installed = Off
-installed = On
 
-; The canonical URL to the OJS installation (excluding the trailing slash)
-base_url = "http://127.0.0.1:8080"
+; The canonical URL to the OMP installation (excluding the trailing slash)
+base_url = "http://pkp.sfu.ca/omp"
 
 ; Enable strict mode. This will more aggressively cause errors/warnings when
 ; deprecated behaviour exists in the codebase.
 strict = Off
 
 ; Session cookie name
-session_cookie_name = OJSSID
+session_cookie_name = OMPSID
 
 ; Session cookie path; if not specified, defaults to the detected base path
 ; session_cookie_path = /
@@ -52,6 +49,12 @@ session_lifetime = 30
 ; Set this to On if you have set up the scheduled tasks script to
 ; execute periodically
 scheduled_tasks = Off
+
+; Scheduled tasks will send email about processing
+; only in case of errors. Set to off to receive
+; all other kind of notification, including success,
+; warnings and notices.
+scheduled_tasks_report_error_only = On
 
 ; Site time zone
 ; Please refer to lib/pkp/registry/timeZones.xml for a full list of supported
@@ -80,49 +83,35 @@ disable_path_info = Off
 allow_url_fopen = Off
 
 ; Base URL override settings: Entries like the following examples can
-; be used to override the base URLs used by OJS. If you want to use a
-; proxy to rewrite URLs to OJS, configure your proxy's URL here.
-; Syntax: base_url[journal_path] = http://www.myUrl.com
-; To override URLs that aren't part of a particular journal, use a
-; journal_path of "index".
+; be used to override the base URLs used by OMP. If you want to use a
+; proxy to rewrite URLs to OMP, configure your proxy's URL here.
+; Syntax: base_url[press_path] = http://www.myUrl.com
+; To override URLs that aren't part of a particular press, use a
+; press_path of "index".
 ; Examples:
 ; base_url[index] = http://www.myUrl.com
-; base_url[myJournal] = http://www.myUrl.com/myJournal
-; base_url[myOtherJournal] = http://myOtherJournal.myUrl.com
+; base_url[myPress] = http://www.myUrl.com/myPress
+; base_url[myOtherPress] = http://myOtherPress.myUrl.com
 
 ; Generate RESTful URLs using mod_rewrite.  This requires the
 ; rewrite directive to be enabled in your .htaccess or httpd.conf.
 ; See FAQ for more details.
-restful_urls = On
+restful_urls = Off
 
 ; Allow the X_FORWARDED_FOR header to override the REMOTE_ADDR as the source IP
-; Set this to "On" if you are behind a reverse proxy and you control the X_FORWARDED_FOR
+; Set this to "On" if you are behind a reverse proxy and you control the
+; X_FORWARDED_FOR header.
 ; Warning: This defaults to "On" if unset for backwards compatibility.
 trust_x_forwarded_for = Off
 
-; Set the maximum number of citation checking processes that may run in parallel.
-; Too high a value can increase server load and lead to too many parallel outgoing
-; requests to citation checking web services. Too low a value can lead to significantly
-; slower citation checking performance. A reasonable value is probably between 3
-; and 10. The more your connection bandwidth allows the better.
-citation_checking_max_processes = 3
-
-; Display a message on the site admin and journal manager user home pages if there is an upgrade available
-show_upgrade_warning = On
-
-; Set the following parameter to off if you want to work with the uncompiled (non-minified) JavaScript
-; source for debugging or if you are working off a development branch without compiled JavaScript.
+; Set the following parameter to off if you want to work with the uncompiled
+; (non-minified) JavaScript source for debugging or if you are working off a
+; development branch without compiled JavaScript.
 enable_minified = Off
 
 ; Provide a unique site ID and OAI base URL to PKP for statistics and security
 ; alert purposes only.
 enable_beacon = On
-
-; Set this to "On" if you would like to only have a single, site-wide Privacy
-; Statement, rather than a separate Privacy Statement for each journal. Setting
-; this to "Off" will allow you to enter a site-wide Privacy Statement as well
-; as separate Privacy Statements for each journal.
-sitewide_privacy_statement = Off
 
 
 ;;;;;;;;;;;;;;;;;;;;;
@@ -130,12 +119,12 @@ sitewide_privacy_statement = Off
 ;;;;;;;;;;;;;;;;;;;;;
 
 [database]
-; ULB host muss den containernamen bekommen!! todo
+
 driver = mysqli
-host = ojs_db_ulb
-username = ojs
-password = ojs
-name = ojs
+host = localhost
+username = omp
+password = omp
+name = omp
 
 ; Set the non-standard port and/or socket, if used
 ; port = 3306
@@ -153,12 +142,13 @@ debug = Off
 
 [cache]
 
-; Choose the type of object data caching to use. Options are:
+; The type of data caching to use. Options are:
 ; - memcache: Use the memcache server configured below
-; - xcache: Use the xcache variable store
-; - apc: Use the APC variable store
-; - none: Use no caching.
-object_cache = none
+; - file: Use file-based caching; configured below
+; - none: Use no caching. This may be extremely slow.
+; This setting affects locale data, press settings, and plugin settings.
+
+cache = file
 
 ; Enable memcache support
 memcache_hostname = localhost
@@ -169,10 +159,10 @@ memcache_port = 11211
 ; these pages will be cached in local flat files for the number of hours
 ; specified in the web_cache_hours option. This will cut down on server
 ; overhead for many requests, but should be used with caution because:
-; 1) Things like journal metadata changes will not be reflected in cached
+; 1) Things like press metadata changes will not be reflected in cached
 ;    data until the cache expires or is cleared, and
 ; 2) This caching WILL NOT RESPECT DOMAIN-BASED SUBSCRIPTIONS.
-; However, for situations like hosting high-volume open access journals, it's
+; However, for situations like hosting high-volume open access presses, it's
 ; an easy way of decreasing server load.
 ;
 ; When using web_cache, configure a tool to periodically clear out cache files
@@ -207,11 +197,11 @@ connection_charset = utf8
 ; Complete path to directory to store uploaded files
 ; (This directory should not be directly web-accessible)
 ; Windows users should use forward slashes
-files_dir = /var/www/files
+files_dir = files
 
 ; Path to the directory to store public uploaded files
 ; (This directory should be web-accessible and the specified path
-; should be relative to the base OJS directory)
+; should be relative to the base OMP directory)
 ; Windows users should use forward slashes
 public_files_dir = public
 
@@ -228,7 +218,6 @@ umask = 0022
 ; The minimum percentage similarity between filenames that should be considered
 ; a possible revision
 filename_revision_match = 70
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Fileinfo (MIME) Settings ;
@@ -253,7 +242,7 @@ force_login_ssl = Off
 ; This check will invalidate a session if the user's IP address changes.
 ; Enabling this option provides some amount of additional security, but may
 ; cause problems for users behind a proxy farm (e.g., AOL).
-session_check_ip = On
+session_check_ip = Off
 
 ; The encryption (hashing) algorithm to use for encrypting user passwords
 ; Valid values are: md5, sha1
@@ -267,7 +256,8 @@ salt = "YouMustSetASecretKeyHere!!"
 ; The unique secret used for encoding and decoding API keys
 api_key_secret = ""
 
-; The number of seconds before a password reset hash expires (defaults to 7200 / 2 hours)
+; The number of seconds before a password reset hash expires (defaults to
+; 7200 seconds (2 hours)
 reset_seconds = 7200
 
 ; Allowed HTML tags for fields that permit restricted HTML.
@@ -282,16 +272,16 @@ allowed_html = "a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,d
 
 ;Implicit Auth Header Variables
 
-;implicit_auth_header_first_name = HTTP_GIVENNAME
-;implicit_auth_header_last_name = HTTP_SN
-;implicit_auth_header_email = HTTP_MAIL
-;implicit_auth_header_phone = HTTP_TELEPHONENUMBER
-;implicit_auth_header_initials = HTTP_METADATA_INITIALS
-;implicit_auth_header_mailing_address = HTTP_METADATA_HOMEPOSTALADDRESS
-;implicit_auth_header_uin = HTTP_UID
+;implicit_auth_header_first_name = HTTP_TDL_GIVENNAME
+;implicit_auth_header_last_name = HTTP_TDL_SN
+;implicit_auth_header_email = HTTP_TDL_MAIL
+;implicit_auth_header_phone = HTTP_TDL_TELEPHONENUMBER
+;implicit_auth_header_initials = HTTP_TDL_METADATA_INITIALS
+;implicit_auth_header_mailing_address = HTTP_TDL_METADATA_TDLHOMEPOSTALADDRESS
+;implicit_auth_header_uin = HTTP_TDL_TDLUID
 
 ; A space delimited list of uins to make admin
-;implicit_auth_admin_list = "jdoe@email.ca jshmo@email.ca"
+;implicit_auth_admin_list = "100000040@tdl.org 85B7FA892DAA90F7@utexas.edu 100000012@tdl.org"
 
 ; URL of the implicit auth 'Way Finder' page. See pages/login/LoginHandler.inc.php for usage.
 
@@ -330,10 +320,6 @@ allowed_html = "a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,d
 ; smtp_oauth_clientsecret =
 ; smtp_oauth_refreshtoken =
 
-; Enable suppressing verification of SMTP certificate in PHPMailer
-; Note: this is not recommended per PHPMailer documentation
-; smtp_suppress_cert_check = On
-
 ; Allow envelope sender to be specified
 ; (may not be possible with some server configurations)
 ; allow_envelope_sender = Off
@@ -342,7 +328,7 @@ allowed_html = "a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,d
 ; default_envelope_sender = my_address@my_host.com
 
 ; Force the default envelope sender (if present)
-; This is useful if setting up a site-wide no-reply address
+; This is useful if setting up a site-wide noreply address
 ; The reply-to field will be set with the reply-to or from address.
 ; force_default_envelope_sender = Off
 
@@ -364,11 +350,11 @@ allowed_html = "a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,d
 ; dmarc_compliant_from_displayname = '%n via %s'
 
 ; Amount of time required between attempts to send non-editorial emails
-; in seconds. This can be used to help prevent email relaying via OJS.
+; in seconds. This can be used to help prevent email relaying via OMP.
 time_between_emails = 3600
 
 ; Maximum number of recipients that can be included in a single email
-; (either as To:, Cc:, or Bcc: addresses) for a non-privileged user
+; (either as To:, Cc:, or Bcc: addresses) for a non-priveleged user
 max_recipients = 10
 
 ; If enabled, email addresses must be validated before login is possible.
@@ -390,6 +376,9 @@ min_word_length = 3
 ; The maximum number of search results fetched per keyword. These results
 ; are fetched and merged to provide results for searches with several keywords.
 results_per_keyword = 500
+
+; The number of hours for which keyword search results are cached.
+result_cache_hours = 1
 
 ; Paths to helper programs for indexing non-text files.
 ; Programs are assumed to output the converted text to stdout, and "%s" is
@@ -422,10 +411,8 @@ results_per_keyword = 500
 oai = On
 
 ; OAI Repository identifier
-repository_id = "ojs2.127.0.0.1:8080"
+repository_id = omp.pkp.sfu.ca
 
-; Maximum number of records per request to serve via OAI
-oai_max_records = 100
 
 ;;;;;;;;;;;;;;;;;;;;;;
 ; Interface Settings ;
@@ -433,10 +420,10 @@ oai_max_records = 100
 
 [interface]
 
-; Number of items to display per page; can be overridden on a per-journal basis
-items_per_page = 25
+; Number of items to display per page; overridable on a per-press basis
+items_per_page = 50
 
-; Number of page links to display; can be overridden on a per-journal basis
+; Number of page links to display; overridable on a per-press basis
 page_links = 10
 
 
@@ -450,10 +437,10 @@ page_links = 10
 recaptcha = off
 
 ; Public key for reCaptcha (see http://www.google.com/recaptcha)
-recaptcha_public_key = your_public_key
+; recaptcha_public_key = your_public_key
 
 ; Private key for reCaptcha (see http://www.google.com/recaptcha)
-recaptcha_private_key = your_private_key
+; recaptcha_private_key = your_private_key
 
 ; Whether or not to use Captcha on user registration
 captcha_on_register = on
@@ -478,13 +465,28 @@ recaptcha_enforce_hostname = Off
 ; tar (used in backup plugin, translation packaging)
 tar = /bin/tar
 
-; On systems that do not have libxsl/xslt libraries installed, or for those who
-; require a specific XSLT processor, you may enter the complete path to the
-; XSLT renderer tool, with any required arguments. Use %xsl to substitute the
-; location of the XSL stylesheet file, and %xml for the location of the XML
-; source file; eg:
-; /usr/bin/java -jar ~/java/xalan.jar -HTML -IN %xml -XSL %xsl
+; egrep (used in copyAccessLogFileTool)
+egrep = /bin/egrep
+
+; gzip (used in FileManager)
+gzip = /bin/gzip
+
+; On systems that do not have PHP4's Sablotron/xsl or PHP5's libxsl/xslt
+; libraries installed, or for those who require a specific XSLT processor,
+; you may enter the complete path to the XSLT renderer tool, with any
+; required arguments. Use %xsl to substitute the location of the XSL
+; stylesheet file, and %xml for the location of the XML source file; eg:
+; /usr/bin/java -jar ~/java/xalan.jar -IN %xml -XSL %xsl %params
+; See xslt_parameter_option below for information on the %params token.
 xslt_command = ""
+
+; For providing XSL parameters to the XSL transformer configured in
+; xslt_command, the following snippet will be repeated once for each parameter
+; to be supplied. %n will be replaced with the parameter name and %v will be
+; replaced by the parameter value. The set of options thus constructed will be
+; inserted into the xslt_command above in place of the %params token.
+xslt_parameter_option = "-PARAM %n %v "
+
 
 ;;;;;;;;;;;;;;;;;;
 ; Proxy Settings ;
