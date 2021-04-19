@@ -48,7 +48,7 @@ services:
       - /home/omp/volumes/public:/var/www/html/public
       - /home/omp/volumes/logs/app:/var/log/apache2
 #      # WARNING: You can only enable file-volumes if file exists in the container.
-#      - /home/omp/volumes/config/omp.config.inc.php:/var/www/html/config.inc.php
+      - /home/omp/volumes/config/omp.config.inc.php:/var/www/html/config.inc.php
 #      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
 #      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
