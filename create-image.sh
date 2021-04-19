@@ -8,7 +8,7 @@ source .env
 
 echo We are using omp  Version =>${OMP_VERSION} 
 PHP_TAIL=/alpine/apache/php
-OMP_GIT=https://github.com/pkp/docker-omp.git
+OMP_GIT=https://github.com/pkp/omp.git
 
 
 git clone ${OMP_GIT} || echo "'${OMP_GIT}' just here"
