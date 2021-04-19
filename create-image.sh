@@ -14,7 +14,7 @@ OMP_GIT=https://github.com/pkp/omp.git
 git clone ${OMP_GIT} || echo "'${OMP_GIT}' just here"
 
 
-mkdir -pv /home/omp/volumes/config && chmod 777 /home/omp/volumes/config
+mkdir -pv /home/omp/volumes/config && sudo chmod 777 /home/omp/volumes/config
 cp ./omp.config.inc.php /home/omp/volumes/config/
 mkdir -pv /home/omp/volumes/files && chmod 777 /home/omp/volumes/files
 mkdir -pv /home/omp/volumes/private
