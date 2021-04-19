@@ -28,8 +28,8 @@
 ; (This is generally done automatically by the installer)
 ; ULB Info hier muss eingegriffen werden, wenn die DB installiert ist!
 ; TODO: sonst startet immer wieder die Installroutine   
-installed = Off
-;installed = On
+;installed = Off
+installed = On
 
 ; The canonical URL to the OJS installation (excluding the trailing slash)
 base_url = "http://127.0.0.1:8080"
