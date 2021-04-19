@@ -136,6 +136,7 @@ name = omp
 
 ; Enable database debug output (very verbose!)
 debug = Off
+;debug = On
 
 ;;;;;;;;;;;;;;;;;;
 ; Cache Settings ;
