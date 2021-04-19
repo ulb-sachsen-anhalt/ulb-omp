@@ -6,7 +6,7 @@ docker build -t omp-ulb .
 
 source .env
 
-echo We are using omp  Version =>${OMP_VERSION} 
+echo We are using omp  Version ${OMP_VERSION} 
 PHP_TAIL=/alpine/apache/php
 OMP_GIT=https://github.com/pkp/omp.git
 
