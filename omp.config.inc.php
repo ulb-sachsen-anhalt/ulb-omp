@@ -27,6 +27,7 @@
 ; Set this to On once the system has been installed
 ; (This is generally done automatically by the installer)
 ;installed = Off
+installed = On
 
 ; The canonical URL to the OMP installation (excluding the trailing slash)
 base_url = "http://pkp.sfu.ca/omp"
@@ -121,7 +122,7 @@ enable_beacon = On
 [database]
 
 driver = mysqli
-host = localhost
+host = omp_db_ulb
 username = omp
 password = omp
 name = omp
