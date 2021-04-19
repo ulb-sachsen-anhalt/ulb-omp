@@ -1,0 +1,12 @@
+stages:
+    - build
+
+build-job:
+  stage: build
+  tags:
+    - ulb-ojs
+
+  script:
+    - echo "Install OJS"
+    - ./create-image.sh ${DB_NAME} ${DB_USER} ${DB_PASS}
+
