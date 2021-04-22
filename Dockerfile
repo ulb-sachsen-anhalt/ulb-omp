@@ -103,7 +103,9 @@ RUN set -xe \
 	# Install Composer Deps:
  	&& composer.phar --working-dir=lib/pkp install --no-dev \
  	&& composer.phar --working-dir=plugins/paymethod/paypal install --no-dev \
-	&& composer.phar --working-dir=plugins/generic/citationStyleLanguage install --no-dev \
+	# todo: plugin citationStyleLanguage kann nicht installiert werden 
+	# -- >Invalid working directory specified, plugins/generic/citationStyleLanguage does not exist. 
+	# && composer.phar --working-dir=plugins/generic/citationStyleLanguage install --no-dev \
 	# Node joins to the party:
 	&& npm install -y && npm run build \
 # Create directories
