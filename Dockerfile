@@ -103,7 +103,7 @@ RUN set -xe \
 	# Install Composer Deps:
  	&& composer.phar --working-dir=lib/pkp install --no-dev \
  	&& composer.phar --working-dir=plugins/paymethod/paypal install --no-dev \
-	# axel && composer.phar --working-dir=plugins/generic/citationStyleLanguage install --no-dev \
+	&& composer.phar --working-dir=plugins/generic/citationStyleLanguage install --no-dev \
 	# Node joins to the party:
 	&& npm install -y && npm run build \
 # Create directories
