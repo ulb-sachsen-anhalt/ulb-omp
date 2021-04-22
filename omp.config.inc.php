@@ -26,6 +26,7 @@
 
 ; Set this to On once the system has been installed
 ; (This is generally done automatically by the installer)
+;ulb
 ;installed = Off
 installed = On
 
@@ -90,13 +91,16 @@ allow_url_fopen = Off
 ; To override URLs that aren't part of a particular press, use a
 ; press_path of "index".
 ; Examples:
-; base_url[index] = http://www.myUrl.com
-; base_url[myPress] = http://www.myUrl.com/myPress
+;ulb
+; base_url[index] = https://omp.bibliothek.uni-halle.de
+; base_url[test] = https://omp.bibliothek.uni-halle.de/test
 ; base_url[myOtherPress] = http://myOtherPress.myUrl.com
 
 ; Generate RESTful URLs using mod_rewrite.  This requires the
 ; rewrite directive to be enabled in your .htaccess or httpd.conf.
 ; See FAQ for more details.
+
+;ulb
 restful_urls = Off
 
 ; Allow the X_FORWARDED_FOR header to override the REMOTE_ADDR as the source IP
@@ -122,6 +126,7 @@ enable_beacon = On
 [database]
 
 driver = mysqli
+;ulb
 host = omp_db_ulb
 username = omp
 password = omp
@@ -181,6 +186,7 @@ web_cache_hours = 1
 [i18n]
 
 ; Default locale
+;ulb
 locale = de_DE
 
 ; Client output/input character set
@@ -253,7 +259,7 @@ session_check_ip = Off
 encryption = sha1
 
 ; The unique salt to use for generating password reset hashes
-salt = "YouMustSetASecretKeyHere!!"
+salt = "some-strange-salt-ulb"
 
 ; The unique secret used for encoding and decoding API keys
 api_key_secret = ""
