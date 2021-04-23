@@ -31,7 +31,9 @@
 installed = On
 
 ; The canonical URL to the OMP installation (excluding the trailing slash)
+;ulb
 base_url = "https://omp.bibliothek.uni-halle.de"
+;base_url = "localhost"
 
 ; Enable strict mode. This will more aggressively cause errors/warnings when
 ; deprecated behaviour exists in the codebase.
