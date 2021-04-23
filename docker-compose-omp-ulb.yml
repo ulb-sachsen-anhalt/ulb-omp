@@ -15,6 +15,7 @@ networks:
 services:
   db:
     image: mariadb:10.2
+    # see https://hub.docker.com/_/mariadb
     env_file:
       - .env
     container_name: "omp_db_ulb"
