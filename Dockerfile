@@ -70,6 +70,7 @@ ENV PHP_EXTENSIONS	\
 	php7-sysvshm	\
 	php7-tokenizer	\
 	php7-xml		\
+	php7-xsl		\
 	php7-xmlreader	\
 	php7-xmlwriter	\
 	php7-zip		\
