@@ -103,7 +103,7 @@ allow_url_fopen = Off
 ; See FAQ for more details.
 
 ;ulb
-restful_urls = Off
+restful_urls = On
 
 ; Allow the X_FORWARDED_FOR header to override the REMOTE_ADDR as the source IP
 ; Set this to "On" if you are behind a reverse proxy and you control the
