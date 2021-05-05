@@ -49,7 +49,6 @@ services:
       - /home/omp/volumes/public:/var/www/html/public
       - /home/omp/volumes/logs/app:/var/log/apache2
       - /home/omp/volumes/config/omp.config.inc.php:/var/www/html/config.inc.php
-      # der container startet apache nicht, wenn key,pem nicht gueltig sind!
       - /home/omp/volumes/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
       - /home/omp/volumes/config/ssl/omp.key:/etc/ssl/apache2/server.key
       - /home/omp/volumes/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
