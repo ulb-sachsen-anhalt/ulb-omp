@@ -18,7 +18,8 @@ docker build -t omp-ulb .
 # see mapped volumes in docker-compose-omp-ulb.yml
 # ------------------------------------------------
 # --> /home/omp/volumes/config
-cp ./omp.config.inc.php /home/omp/volumes/config/
+cp -v ./omp.config.inc.php /home/omp/volumes/config/
+cp -v manager.po /home/omp/volumes/config/locale/de_DE/
 # --> /home/omp/volumes/files
 # --> /home/omp/volumes/private
 # --> /home/omp/volumes/public
