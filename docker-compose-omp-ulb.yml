@@ -52,6 +52,7 @@ services:
       # der container startet apache nicht, wenn key,pem nicht gueltig sind!
       - /home/omp/volumes/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
       - /home/omp/volumes/config/ssl/omp.key:/etc/ssl/apache2/server.key
+      - /home/omp/volumes/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
 
 
 #      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
