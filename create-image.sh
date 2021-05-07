@@ -4,7 +4,7 @@ set -eu
 
 source .env
 
-echo We are using omp  Version ${OMP_VERSION} 
+echo We are using omp  Version ${OMP_VERSION_ULB} 
 
 # please create mapped folders initially! 
 # see mapped volumes in docker-compose-omp-ulb.yml
