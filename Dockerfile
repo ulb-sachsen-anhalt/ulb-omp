@@ -4,10 +4,12 @@ LABEL maintainer="Public Knowledge Project <marc.bria@gmail.com>"
 
 WORKDIR /var/www/html
 
+ARG USE_VERSION=stable-3_3_1
+
 ENV COMPOSER_ALLOW_SUPERUSER=1  \
 	SERVERNAME="localhost"      \
 	HTTPS="on"                  \
-	OMP_VERSION=stable-3_3_1 \
+	OMP_VERSION=${USE_VERSION} \
 	OMP_CLI_INSTALL="0"         \
 	OMP_DB_HOST="localhost"     \
 	OMP_DB_USER="omp"           \
