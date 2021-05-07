@@ -189,7 +189,7 @@ web_cache_hours = 1
 
 ; Default locale
 ;ulb
-locale = de_DE
+locale = en_US
 
 ; Client output/input character set
 client_charset = utf-8
