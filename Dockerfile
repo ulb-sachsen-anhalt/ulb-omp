@@ -86,7 +86,7 @@ ENV BUILDERS 		\
 
 # To make a smaller image, we start with the copy.
 # This let us joining runs in a single layer.
-COPY exclude.list /tmp/exclude.list
+COPY ./resources/exclude.list /tmp/exclude.list
 
 RUN set -xe \
 	&& apk add --no-cache --virtual .build-deps $BUILDERS \
@@ -134,6 +134,7 @@ RUN set -xe \
 	&& find . \( -name .gitignore -o -name .gitmodules -o -name .keepme \) -exec rm -Rf '{}' \;
 
 COPY root/ /
+COPY ./resources/favicon.ico /var/www/html/favicon.ico
 
 EXPOSE 80 443
 
