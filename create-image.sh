@@ -17,12 +17,10 @@ cp -v manager.po /home/omp/volumes/config/locale/de_DE/
 # --> /home/omp/volumes/public
 
 echo try start docker-compose with docker-compose-ulb.yml
-#start omp
+
 
 docker-compose --file ./docker-compose-omp-ulb.yml down
 
 docker-compose --file ./docker-compose-omp-ulb.yml up -d
 
-# copy uni favicon
-docker cp favicon.ico omp_app_ulb:/var/www/html/favicon.ico
 
