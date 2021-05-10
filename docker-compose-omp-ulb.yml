@@ -34,7 +34,7 @@ services:
     restart: always
 
   omp:
-    image: omp-ulb
+    image: omp-ulb:${OMP_VERSION_ULB}
     build:
       context: .
       dockerfile: Dockerfile
