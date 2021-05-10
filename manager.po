@@ -34,7 +34,6 @@ msgstr "Über"
 msgid "manager.setup.contextAbout.description"
 msgstr "Über Beschreibung"
 
-manager.setup.contextAbout.description
 
 # ULB Halle end
 
