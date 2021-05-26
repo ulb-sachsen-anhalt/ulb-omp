@@ -25,8 +25,8 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     volumes:
-      - /home/omp/volumes/db:/var/lib/mysql
-      - /home/omp/volumes/logs/db:/var/log/mysql
+      - ${PROJECT_DATA_ROOT}/db:/var/lib/mysql
+      - ${PROJECT_DATA_ROOT}/logs/db:/var/log/mysql
 #      - ./volumes/config/db.charset.conf:/etc/mysql/conf.d/charset.cnf
 #      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
@@ -50,14 +50,14 @@ services:
       - "${HTTPS_PORT}:443"
     volumes:
       - /etc/localtime:/etc/localtime
-      - /home/omp/volumes/files:/var/www/files
-      - /home/omp/volumes/public:/var/www/html/public
-      - /home/omp/volumes/logs/app:/var/log/apache2
-      - /home/omp/volumes/config/omp.config.inc.php:/var/www/html/config.inc.php
-      - /home/omp/volumes/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
-      - /home/omp/volumes/config/ssl/omp.key:/etc/ssl/apache2/server.key
+      - ${PROJECT_DATA_ROOT}/files:/var/www/files
+      - ${PROJECT_DATA_ROOT}/public:/var/www/html/public
+      - ${PROJECT_DATA_ROOT}/logs/app:/var/log/apache2
+      - ${PROJECT_DATA_ROOT}/config/omp.config.inc.php:/var/www/html/config.inc.php
+      - ${PROJECT_DATA_ROOT}/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
+      - ${PROJECT_DATA_ROOT}/config/ssl/omp.key:/etc/ssl/apache2/server.key
       # need temporary updates...  
-      - /home/omp/volumes/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
+      - ${PROJECT_DATA_ROOT}/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
 #      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
 #      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
