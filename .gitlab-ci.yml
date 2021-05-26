@@ -8,5 +8,5 @@ build-job:
 
   script:
     - echo "Install OMP"
-    - ./create-image.sh
+    - ./build-omp.sh
 
