@@ -69,9 +69,11 @@ scheduled_tasks_report_error_only = On
 time_zone = "UTC"
 
 ; Short and long date formats
-date_format_short = "%Y-%m-%d"
+;date_format_short = "%Y-%m-%d"
+date_format_short = "%d.%m.%Y"
 date_format_long = "%B %e, %Y"
-datetime_format_short = "%Y-%m-%d %I:%M %p"
+;datetime_format_short = "%Y-%m-%d %I:%M %p"
+datetime_format_short = "%d.%m.%Y %I:%M %p"
 datetime_format_long = "%B %e, %Y - %I:%M %p"
 time_format = "%I:%M %p"
 
@@ -189,7 +191,7 @@ web_cache_hours = 1
 
 ; Default locale
 ;ulb
-locale = en_US
+locale = de_DE
 
 ; Client output/input character set
 client_charset = utf-8
