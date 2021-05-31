@@ -15,6 +15,8 @@ msgstr ""
 msgid "manager.setup.identity"
 msgstr "Identität"
 
+# ULB Halle end
+
 msgid "manager.setup.disableSubmissions.description"
 msgstr "Hier können sie die Einreichungen deaktivieren"
 
