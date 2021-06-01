@@ -246,10 +246,10 @@ filename_revision_match = 70
 [security]
 
 ; Force SSL connections site-wide
-force_ssl = Off
+force_ssl = On
 
 ; Force SSL connections for login only
-force_login_ssl = Off
+force_login_ssl = On
 
 ; This check will invalidate a session if the user's IP address changes.
 ; Enabling this option provides some amount of additional security, but may
