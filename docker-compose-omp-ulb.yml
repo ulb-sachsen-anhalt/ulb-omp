@@ -25,8 +25,8 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     volumes:
-      - ${PROJECT_DATA_ROOT}/db:/var/lib/mysql
-      - ${PROJECT_DATA_ROOT}/logs/db:/var/log/mysql
+      - /data/omp/db:/var/lib/mysql
+      - /data/omp/logs/db:/var/log/mysql
 #      - ./volumes/config/db.charset.conf:/etc/mysql/conf.d/charset.cnf
 #      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
@@ -50,16 +50,16 @@ services:
       - "${HTTPS_PORT}:443"
     volumes:
       - /etc/localtime:/etc/localtime
-      - ${PROJECT_DATA_ROOT}/files:/var/www/files
-      - ${PROJECT_DATA_ROOT}/public:/var/www/html/public
-      - ${PROJECT_DATA_ROOT}/logs/app:/var/log/apache2
-      - ${PROJECT_DATA_ROOT}/config/omp.config.inc.php:/var/www/html/config.inc.php
-      - ${PROJECT_DATA_ROOT}/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
-      - ${PROJECT_DATA_ROOT}/config/ssl/omp.key:/etc/ssl/apache2/server.key
+      - /data/omp/files:/var/www/files
+      - /data/omp/public:/var/www/html/public
+      - /data/omp/logs/app:/var/log/apache2
+      - /data/omp/config/omp.config.inc.php:/var/www/html/config.inc.php
+      - /data/omp/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
+      - /data/omp/config/ssl/omp.key:/etc/ssl/apache2/server.key
       # need temporary updates...  
-      - ${PROJECT_DATA_ROOT}/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
-      - ${PROJECT_DATA_ROOT}/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
-      - ${PROJECT_DATA_ROOT}/config/locale/de_DE/default.po:/var/www/html/locale/de_DE/default.po
+      - /data/omp/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
+      - /data/omp/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
+      - /data/omp/config/locale/de_DE/default.po:/var/www/html/locale/de_DE/default.po
 #      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
 #      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
