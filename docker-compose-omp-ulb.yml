@@ -27,7 +27,7 @@ services:
     volumes:
       - /data/omp/db:/var/lib/mysql
       - /data/omp/logs/db:/var/log/mysql
-#      - ./volumes/config/db.charset.conf:/etc/mysql/conf.d/charset.cnf
+      - ./resources/my.cnf:/etc/mysql/conf.d/charset.cnf
 #      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
       - inside
