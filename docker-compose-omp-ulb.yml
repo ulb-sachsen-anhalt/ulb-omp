@@ -54,8 +54,8 @@ services:
       - /data/omp/public:/var/www/html/public
       - /data/omp/logs/app:/var/log/apache2
       - /data/omp/config/omp.config.inc.php:/var/www/html/config.inc.php
-      - /data/omp/config/ssl/ojs.pem:/etc/ssl/apache2/server.pem
-      - /data/omp/config/ssl/ojs.key:/etc/ssl/apache2/server.key
+      - /data/omp/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
+      - /data/omp/config/ssl/omp.key:/etc/ssl/apache2/server.key
       # need temporary updates...  
       - /data/omp/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
       - /data/omp/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
