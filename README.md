@@ -1,7 +1,11 @@
 https://github.com/pkp/docker-ojs
 
-Diese Rechte entsprechen den uid/gid im entspr. container.
-Da diese Ordner von den Containern eingebunden werden, sollten diese Rechte gesetzt werden.
+OMP Daten in
+
+/data/omp
+
+Die Besitzer hier entsprechen den uid/gid im entspr. Container.
+Da diese Ordner/Unterordner von den Containern eingebunden werden, sollten diese Rechte analog gesetzt werden:
 
 Im container omp_app_ulb
 <pre>
