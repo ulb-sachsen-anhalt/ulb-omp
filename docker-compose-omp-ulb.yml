@@ -1,5 +1,5 @@
 # File: docker-compose.yml
-# Access via "http://localhost:8080"
+# Access via "https://omp.bibliothek.uni-halle.de"
 #
 # Call example:
 # $ docker-compose -f docker-compose-ulb.yml up
