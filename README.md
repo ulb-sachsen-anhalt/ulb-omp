@@ -22,5 +22,5 @@ Im container omp_db_ulb
 <pre>
 sudo chown 100:100  /data/omp/ -R
 sudo chown 999:999  /data/omp/logs/db -R 
-sudo chown 999:999  /data/db -R 
+sudo chown 999:999  /data/omp/db -R 
 </pre>
