@@ -10,7 +10,7 @@ version: "3.6"
 
 
 networks:
-  inside:
+  insidedev:
     external: false
 
 services:
@@ -31,7 +31,7 @@ services:
       - ./resources/my.cnf:/etc/mysql/conf.d/charset.cnf
 #      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
-      - inside
+      - insidedev
     restart: always
 
   omp:
@@ -65,7 +65,7 @@ services:
 #      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
     networks:
-      - inside
+      - insidedev
     depends_on:
       - dbdev
     restart: always
