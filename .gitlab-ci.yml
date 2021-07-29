@@ -1,8 +1,19 @@
 stages:
+    - build_dev
     - build
+
+builddev-job:
+  stage: build_dev
+  tags:
+    - ulb-omp-dev
+  script:
+    - echo "Install OMP DEV"
+    - ./build-omp-dev.sh
+
 
 build-job:
   stage: build
+  needs: ["build_dev"]
   tags:
     - ulb-omp
 
