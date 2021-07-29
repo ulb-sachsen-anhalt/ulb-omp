@@ -31,8 +31,8 @@ cp -v ./locale/*.po $data_dir/config/locale/de_DE/
 echo try starting docker-compose with docker-compose-ulb.yml
 
 
-docker-compose --file ./docker-compose-omp-ulb.yml down
+docker-compose --file ./docker-compose-omp-ulb.yml --project-name prod down
 
-docker-compose --file ./docker-compose-omp-ulb.yml up -d
+docker-compose --file ./docker-compose-omp-ulb.yml --project-name prod up -d
 
 
