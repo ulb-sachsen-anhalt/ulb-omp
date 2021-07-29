@@ -13,7 +13,8 @@ builddev-job:
 
 build-job:
   stage: build
-  needs: ["build_dev"]
+  needs: 
+    - build_dev
   tags:
     - ulb-omp
 
