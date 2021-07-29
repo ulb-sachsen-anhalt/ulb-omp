@@ -1,2 +1,0 @@
-docker-compose -f docker-compose-omp-ulb.yml down
-docker-compose -f docker-compose-omp-ulb.yml up -d
