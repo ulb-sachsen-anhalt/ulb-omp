@@ -25,7 +25,8 @@ echo "OMP data are in $data_dir/*"
 echo propagate new version of \"omp.config.inc.php\"
 cp -v ./omp.config.inc.php $data_dir/config/
 
-sed -i "s/omp_db_ulb/ompdev_db_ulb/" $data_dir/config/ojs.config.inc.php
+# replace Host variable
+sed -i "s/omp_db_ulb/ompdev_db_ulb/" $data_dir/config/omp.config.inc.php
 
 echo propagate new version of \"manager.po\"
 cp -v ./locale/*.po $data_dir/config/locale/de_DE/
