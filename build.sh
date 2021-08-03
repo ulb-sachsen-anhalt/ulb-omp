@@ -33,16 +33,15 @@ cp -v ./omp.config.inc.php $data_dir/config/
 
 # replace Host variable if in development build
 if [ $1 == "dev" ]; then
-    echo reconfigure compose file: docker-compose-ompdev-ulb.yml    
+    echo "reconfigure compose file: docker-compose-ompdev-ulb.yml"
     sed -i "s/ompprod_db_ulb/ompdev_db_ulb/" $data_dir/config/omp.config.inc.php
-    cp ./docker-compose-ompprod-ulb.yml ./docker-compose-ompdev-ulb.yml
+    cp -v ./docker-compose-ompprod-ulb.yml ./docker-compose-ompdev-ulb.yml
+    echo "sed data in docker-compose-ompdev-ulb.yml for develop server"
     sed -i "s/ompprod/ompdev/" ./docker-compose-ompdev-ulb.yml
     sed -i "s/80:80/8080:80/" ./docker-compose-ompdev-ulb.yml
     sed -i "s/443:443/8443:443/" ./docker-compose-ompdev-ulb.yml
-    
     sed -i "s/OMP_VERSION_ULB_PROD/OMP_VERSION_ULB_DEV/" ./docker-compose-ompdev-ulb.yml
 fi
-
 
 echo propagate new version of \"manager.po\"
 cp -v ./locale/*.po $data_dir/config/locale/de_DE/
