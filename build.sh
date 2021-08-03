@@ -49,6 +49,7 @@ cp -v ./locale/*.po $data_dir/config/locale/de_DE/
 
 echo try starting docker-compose with docker-compose-omp$1-ulb.yml
 
+./stop-omp $1
 ./start-omp $1
 
 
