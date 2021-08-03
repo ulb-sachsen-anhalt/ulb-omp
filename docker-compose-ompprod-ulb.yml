@@ -7,7 +7,7 @@
 version: "3.6"
 
 networks:
-  inside_ompprod:
+  inside:
     external: false
 
 services:
@@ -28,7 +28,7 @@ services:
       - ./resources/my.cnf:/etc/mysql/conf.d/charset.cnf
 #      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
-      - inside_ompprod
+      - inside
     restart: always
 
   ompprod:
@@ -61,7 +61,7 @@ services:
 #      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
     networks:
-      - inside_ompprod
+      - inside
     depends_on:
       - db
     restart: always
