@@ -2,6 +2,8 @@
 
 set -eu
 
+
+
 # most vars in .env
 source .env
 
