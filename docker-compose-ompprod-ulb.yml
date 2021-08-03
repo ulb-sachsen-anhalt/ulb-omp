@@ -54,8 +54,6 @@ services:
       - /data/ompprod/config/omp.config.inc.php:/var/www/html/config.inc.php
       - /data/ompprod/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
       - /data/ompprod/config/ssl/omp.key:/etc/ssl/apache2/server.key
-
-      - /data/ompprod/config/omp.config.inc.php:/var/www/html/locale/de_DE/manager.po
       - /data/ompprod/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
       - /data/ompprod/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
       - /data/ompprod/config/locale/de_DE/default.po:/var/www/html/locale/de_DE/default.po
