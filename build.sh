@@ -46,6 +46,9 @@ fi
 echo propagate new version of \"manager.po\"
 cp -v ./locale/*.po $data_dir/config/locale/de_DE/
 
+chown 100:100  $data_dir -R
+chown 999:999  $data_dir/logs/db -R 
+chown 999:999  $data_dir/db -R 
 
 echo try starting docker-compose with docker-compose-omp$1-ulb.yml
 
