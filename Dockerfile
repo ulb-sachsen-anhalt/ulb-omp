@@ -38,7 +38,9 @@ ENV PACKAGES 		\
 	php7			\
 	php7-apache2	\
 	runit 			\
-	supervisor
+	supervisor		\
+	# ulb optional installed because of port forwarding to dev container
+	apache2-proxy
 
 # PHP extensions
 ENV PHP_EXTENSIONS	\
