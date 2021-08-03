@@ -131,7 +131,7 @@ enable_beacon = On
 
 driver = mysqli
 ;ulb
-host = omp_db_ulb
+host = ompprod_db_ulb
 username = omp
 password = omp
 name = omp
