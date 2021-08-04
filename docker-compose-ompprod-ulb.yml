@@ -52,7 +52,7 @@ services:
       - /data/ompprod/public:/var/www/html/public
       - /data/ompprod/logs/app:/var/log/apache2
       - /data/ompprod/config/omp.config.inc.php:/var/www/html/config.inc.php
-      - /data/ompprod/config/ompprod.conf:/etc/apache/conf.de/omp.conf
+      - /data/ompprod/config/ompprod.conf:/etc/apache2/conf.d/omp.conf
       - /data/ompprod/config/ssl/omp.pem:/etc/ssl/apache2/server.pem
       - /data/ompprod/config/ssl/omp.key:/etc/ssl/apache2/server.key
       - /data/ompprod/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
