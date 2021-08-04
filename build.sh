@@ -30,14 +30,17 @@ echo "OMP data are in $data_dir/*"
 # place omp.config.inc.php file
 echo propagate new version of \"omp.config.inc.php\"
 cp -v ./omp.config.inc.php $data_dir/config/
+cp -v ./resources/omp.config.inc.php $data_dir/config/
+cp -v ./resources/omp$1.conf $data_dir/config/
 
 # replace Host variable if in development build
 if [ $1 == "dev" ]; then
+    # cp -v ./resources/ompdev.conf $data_dir/config/
     echo "reconfigure compose file: docker-compose-ompdev-ulb.yml"
     sed -i "s/ompprod_db_ulb/ompdev_db_ulb/" $data_dir/config/omp.config.inc.php
     cp -v ./docker-compose-ompprod-ulb.yml ./docker-compose-ompdev-ulb.yml
     echo "sed data in docker-compose-ompdev-ulb.yml for develop server"
-    sed -i "s/ompprod/ompdev/" ./docker-compose-ompdev-ulb.yml
+    sed -i "s/ompprod/ompdev/g" ./docker-compose-ompdev-ulb.yml
     sed -i "s/80:80/8080:80/" ./docker-compose-ompdev-ulb.yml
     sed -i "s/443:443/8443:443/" ./docker-compose-ompdev-ulb.yml
     sed -i "s/OMP_VERSION_ULB_PROD/OMP_VERSION_ULB_DEV/" ./docker-compose-ompdev-ulb.yml
