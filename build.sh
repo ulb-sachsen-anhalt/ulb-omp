@@ -44,7 +44,10 @@ echo "OMP data are in $data_dir/*"
 # place omp.config.inc.php file
 echo propagate new version of \"omp.config.inc.php\"
 cp -v ./resources/omp.config.inc.php $data_dir/config/
-sed -i "s/mail_password/$SMTP_PASS/" $data_dir/config/omp.config.inc.php
+
+if [ $3 == "prod" ]; then
+    sed -i "s/mail_password/$SMTP_PASS/" $data_dir/config/omp.config.inc.php
+fi
 
 # place Apache configuration file for VirtualHost 
 cp -v ./resources/omp$3.conf $data_dir/config/
