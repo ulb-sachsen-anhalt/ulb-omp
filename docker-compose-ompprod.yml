@@ -31,7 +31,6 @@ services:
 #      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
       - inside
-      - omp
     restart: always
 
   ompprod:
@@ -66,6 +65,7 @@ services:
 
     networks:
       - inside
+      - omp      
     depends_on:
       - db
     restart: always
