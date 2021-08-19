@@ -9,6 +9,8 @@ version: "3.6"
 networks:
   inside:
     external: false
+  omp:  
+    external: true 
 
 services:
   db:
@@ -29,6 +31,7 @@ services:
 #      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
       - inside
+      - omp
     restart: always
 
   ompprod:
