@@ -246,7 +246,7 @@ filename_revision_match = 70
 [security]
 
 ; Force SSL connections site-wide
-force_ssl = On
+; force_ssl = On
 
 ; Force SSL connections for login only
 force_login_ssl = On
@@ -308,17 +308,18 @@ allowed_html = "a[href|target|title],em,strong,cite,code,ul,ol,li[class],dl,dt,d
 [email]
 
 ; Use SMTP for sending mail instead of mail()
-; smtp = On
+smtp = On
 
 ; SMTP server settings
-; smtp_server = mail.example.com
-; smtp_port = 25
+smtp_server = mail.uni-halle.de
+smtp_port = 587
 
 ; Enable SMTP authentication
 ; Supported smtp_auth: ssl, tls (see PHPMailer SMTPSecure)
-; smtp_auth = ssl
-; smtp_username = username
-; smtp_password = password
+smtp_auth = tls
+smtp_username = aqvgr
+; passwort wird mit sed ersetzt
+smtp_password = mail_password
 ;
 ; Supported smtp_authtype: RAM-MD5, LOGIN, PLAIN, XOAUTH2 (see PHPMailer AuthType)
 ; (Leave blank to try them in that order)
