@@ -59,8 +59,14 @@ if [ $3 == "dev" ]; then
     cp -v ./docker-compose-ompprod.yml ./docker-compose-ompdev.yml
     echo "sed data in docker-compose-ompdev.yml for develop server"
     sed -i "s/ompprod/ompdev/g" ./docker-compose-ompdev.yml
-    sed -i "s/80:80/8080:80/" ./docker-compose-ompdev.yml
-    sed -i "s/443:443/8443:443/" ./docker-compose-ompdev.yml
+    
+    # do not expose any port
+    sed -i "/ports:/d" ./docker-compose-ompdev.yml
+    sed -i "/80:80/d" ./docker-compose-ompdev.yml
+    sed -i "/443:443/d" ./docker-compose-ompdev.yml
+    # sed -i "s/80:80/8080:80/" ./docker-compose-ompdev.yml
+    # sed -i "s/443:443/8443:443/" ./docker-compose-ompdev.yml
+    
     sed -i "s/OMP_VERSION_ULB_PROD/OMP_VERSION_ULB_DEV/" ./docker-compose-ompdev.yml
 fi
 
