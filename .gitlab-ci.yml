@@ -10,7 +10,7 @@ builddev-job:
 
   script:
     - echo "Install OMP DEVELOP"
-    - ./build.sh dev
+    - ./build.sh omp omp dev
 
 
 build-job:
@@ -23,6 +23,6 @@ build-job:
     - ulb-omp
 
   script:
-    - echo "Install OMP"
-    - ./build.sh prod
+    - echo "Install OMP PRODUCTION"
+    - ./build.sh  omp omp prod
 
