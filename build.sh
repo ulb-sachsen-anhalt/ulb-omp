@@ -67,6 +67,12 @@ fi
 echo propagate new version of \"manager.po\"
 cp -v ./locale/*.po $data_dir/config/locale/de_DE/
 
+compose_network=omp
+
+docker network inspect $compose_network >/dev/null 2>&1 || \
+    docker network create $compose_network
+
+
 echo try starting docker-compose with docker-compose-omp$3.yml
 
 ./stop-omp $3
