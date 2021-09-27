@@ -15,6 +15,11 @@ msgstr ""
 msgid "manager.setup.identity"
 msgstr "Identität"
 
+# ULB Halle start
+msgid "manager.setup.ideninformationtity"
+msgstr "Informationen"
+
+
 # ULB Halle end
 
 msgid "manager.setup.disableSubmissions.description"
