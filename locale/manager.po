@@ -16,7 +16,7 @@ msgid "manager.setup.identity"
 msgstr "Identität"
 
 # ULB Halle start
-msgid "manager.setup.ideninformationtity"
+msgid "manager.setup.information"
 msgstr "Informationen"
 
 
