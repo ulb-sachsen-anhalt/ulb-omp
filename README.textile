@@ -1,4 +1,3 @@
-
 h1. Journal Server OJS / OMP Dokumentation
 
 Die Serversoftware ist Open Source unter der Lizenz "CC BY-SA 3.0.":https://creativecommons.org/licenses/by/3.0/de/ 
@@ -16,7 +15,7 @@ Develop: "publicdev.bibliothek.uni-halle.de":https://publicdev.bibliothek.uni-ha
 - amuyf (A. Bauer ULB) | - Ubuntu 18.04.5 LTS (Bionic Beaver)
 - Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
 - Docker 
-- gitlab-runner | 
+- gitlab-runner  |
 |^. OMP |^. Produktion: "omp.bibliothek.uni-halle.de":https://omp.bibliothek.uni-halle.de
 Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de | SSH
 - syssc (Thomas Zimmermann ITZ)
@@ -26,6 +25,7 @@ Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de
 - Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
 - Docker 
 - gitlab-runner |
+
 
 
 
