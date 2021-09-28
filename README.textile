@@ -13,17 +13,15 @@ table{border:1px solid black; padding:10px}.
 Develop: "publicdev.bibliothek.uni-halle.de":https://publicdev.bibliothek.uni-halle.de | SSH
 - syssc (Thomas Zimmermann ITZ)
 - ojs (KeyPass)
-- amuyf (A. Bauer ULB)
-| - Ubuntu 18.04.5 LTS (Bionic Beaver)
+- amuyf (A. Bauer ULB) | - Ubuntu 18.04.5 LTS (Bionic Beaver)
 - Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
 - Docker 
-- gitlab-runner |
+- gitlab-runner | 
 |^. OMP |^. Produktion: "omp.bibliothek.uni-halle.de":https://omp.bibliothek.uni-halle.de
 Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de | SSH
 - syssc (Thomas Zimmermann ITZ)
 - omp (KeyPass)
-- amuyf (A. Bauer ULB)
-| - Ubuntu 20.04.3 LTS (Focal Fossa)
+- amuyf (A. Bauer ULB) | - Ubuntu 20.04.3 LTS (Focal Fossa)
 - Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
 - Docker 
 - gitlab-runner |
