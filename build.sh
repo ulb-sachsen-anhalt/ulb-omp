@@ -89,9 +89,9 @@ echo try starting docker-compose with docker-compose-omp"$TARGET".yml
 
 # backup database
 if [ "$TARGET" == "prod" ]; then
-    echo dump OJS database "$data_dir/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_ojs.sql"
     backup=$data_dir/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_ojs
-    docker exec "ojs$3_db_ulb mysqldump -p${OMP_DB_PASSWORD} ojs > $backup" && \
+    echo dump OJS database "$backup.sql"
+    docker exec omp$TARGET_db_ulb mysqldump -p${OMP_DB_PASSWORD} ojs > $backup && \
         echo "backup successfull: $(du -h $backup) && mv $backup $backup.sql" || \
         if [ -f "$backup" ]; then 
             rm "$backup"
