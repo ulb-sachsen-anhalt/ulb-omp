@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu 
+set -e
 
 if [ $# -eq 0 ]
   then
@@ -82,9 +82,6 @@ docker network inspect $compose_network >/dev/null 2>&1 || \
     docker network create $compose_network
 
 
-echo try starting docker-compose with docker-compose-omp"$TARGET".yml
-
-
 # backup database
 if [ "$TARGET" == "prod" ]; then
     backup=$data_dir/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_omp
@@ -96,6 +93,8 @@ if [ "$TARGET" == "prod" ]; then
             echo "backup failed, delete empty dump"
         fi
 fi
+
+echo try starting docker-compose with docker-compose-omp"$TARGET".yml
 
 ./stop-omp "$TARGET"
 ./start-omp "$TARGET"
