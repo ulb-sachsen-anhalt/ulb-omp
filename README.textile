@@ -14,7 +14,7 @@ Develop: "publicdev.bibliothek.uni-halle.de":https://publicdev.bibliothek.uni-ha
 - ojs (KeyPass)
 - amuyf (A. Bauer ULB) | - Ubuntu 18.04.5 LTS (Bionic Beaver)
 - Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
-- Docker 
+- Docker-Compose 
 - gitlab-runner  |
 |^. OMP |^. Produktion: "omp.bibliothek.uni-halle.de":https://omp.bibliothek.uni-halle.de
 Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de | SSH
@@ -22,7 +22,7 @@ Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de
 - omp (KeyPass)
 - amuyf (A. Bauer ULB) | - Ubuntu 20.04.3 LTS (Focal Fossa)
 - Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
-- Docker 
+- Docker-Compose 
 - gitlab-runner |
 
 
