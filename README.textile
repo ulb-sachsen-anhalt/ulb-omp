@@ -14,22 +14,17 @@ Develop: "publicdev.bibliothek.uni-halle.de":https://publicdev.bibliothek.uni-ha
 - syssc (Thomas Zimmermann ITZ)
 - ojs (KeyPass)
 - amuyf (A. Bauer ULB) | - Ubuntu 18.04.5 LTS (Bionic Beaver)
-- Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
-<<<<<<< HEAD
+- Samba-Share für alle Daten inkl. DB @/data@ (im Backupsystem)
 - Docker 
 - gitlab-runner |
-=======
-- Docker-Compose 
-- gitlab-runner  |
->>>>>>> b6d5b29e3dc7a7b2b4f5b9747664b46799d4fa21
 |^. OMP |^. Produktion: "omp.bibliothek.uni-halle.de":https://omp.bibliothek.uni-halle.de
 Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de | SSH
 - syssc (Thomas Zimmermann ITZ)
 - omp (KeyPass)
 - amuyf (A. Bauer ULB) 
 | - Ubuntu 20.04.3 LTS (Focal Fossa)
-- Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
-- Docker-Compose 
+- Samba-Share für alle Daten inkl. DB @/data@ (im Backupsystem)
+- Docker 
 - gitlab-runner |
 
 
@@ -60,42 +55,43 @@ bc.
 
 
 Installationsroot befindet sich jeweils in:
-OMS:  _/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-omp_
-OJS: _/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-ojs_
-Hier befinden sich die ausführbaren Scripte: _start-omp, stop-omp_ bzw. _start-ojs, stop-ojs_ 
-Diese kapseln nur den längeren _docker-compose_ Aufruf und velangen die Parameter _dev_ bzw. _prod_
+OMS:  @/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-omp@
+OJS: @/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-ojs@
+Hier befinden sich die ausführbaren Scripte: @start-omp, stop-omp@ bzw. @start-ojs, stop-ojs@ 
+Diese kapseln nur den längeren @docker-compose@ Aufruf und velangen die Parameter _dev_ bzw. _prod_
 Mit jedem push ins ULB-gitlab (ojs/omp) des ITZ, startet eine CI/CD pipeline.
 Der gitlab-runner auf dem Installationssystem checkt die Aktualisierungen aus
 und startet die Container neu mit den entsprechenden Anpassungen.
 Im ersten Schritt startet das Development System neu. Siehe: _.gitlab-ci.yml_
 Sollte es Probleme geben, bleibt das Produktionssystem weiterhin aktiv und wird nicht neu gestartet.
 Die Pipline im Gitlab scheitert; Fehler können behoben werden.
-Um den Aufbau vom _dev_ und _prod_ System zu verstehen, muss das _./build.sh_ Script untersucht werden.
-Grundsätzlich sind beide Systeme identisch. Sie haben nur eine eigene getrennte Datenbasis in _/data_.
+Um den Aufbau vom _dev_ und _prod_ System zu verstehen, muss das @./build.sh@ Script untersucht werden.
+Grundsätzlich sind beide Systeme identisch. Sie haben nur eine eigene getrennte Datenbasis in @/data@.
 Beim Bau wird von der _docker-compose-{omp/ojs}prod.yml_ eine Kopie _docker-compose-{omp/ojs}dev.yml_ erstellt
-und mit _sed_ die _volumes_ und _ports_ angepasst.
+und mit @sed@ die _volumes_ und _ports_ angepasst.
 Die Develop Container haben gar keine Ports nach außen geöffnet. 
 Den kompletten Traffic nimmt der Produktions Container entgegen und leitet ihn über ein Docker network an den 
 Develop Container weiter. 
 Der Develop Container ist also ohne laufenden Produktions Container nicht erreichbar!
-Die Weiterleitung übernimmt Apache (ProxyPass) mit den Configurationsfiles in _./resources/*.conf_
+Die Weiterleitung übernimmt Apache (ProxyPass) mit den Configurationsfiles in @./resources/*.conf@
 Weitere grundsätzliche Einstellungen (Email/PWD, etc.) befinden sich in den Dateien
-_./resources/omp.config.inc.php_ bzw. _./resources/ojs.config.inc.php_.
+@./resources/omp.config.inc.php@ bzw. @./resources/ojs.config.inc.php@.
 
 
 
 
 
-h2. Rechte im _/data_ Verzeichnis
+h2. Rechte im @/data@ Verzeichnis
 
 Beispiele für OMP (OJS analog)
 
-@/data/omp@
+@/data/ompprod@
+@/data/ompdev@
 
 Die Besitzer hier entsprechen den uid/gid im velinkten Container.
 Da diese Ordner/Unterordner von den Containern eingebunden werden, sollten diese Rechte analog gesetzt werden:
 
-Im Application (OMP) container omp_app_ulb
+Im Application (OMP) container _ompprod_app_ulb_
 
 bc..
 id apache   
@@ -103,7 +99,7 @@ uid=100(apache) gid=101(apache) groups=101(apache),82(www-data),101(apache)
 bc.
 
 
-Im Database (MariaDb) container omp_db_ulb
+Im Database (MariaDb) container ompprod_db_ulb
 
 bc..
 id mysql  
@@ -112,7 +108,7 @@ bc.
 
 
 bc..
-sudo chown 100:100  /data/omp/ -R
-sudo chown 999:999  /data/omp/logs/db -R 
-sudo chown 999:999  /data/omp/db -R 
+sudo chown 100:100  /data/ompprod/ -R
+sudo chown 999:999  /data/ompprod/logs/db -R 
+sudo chown 999:999  /data/ompprod/db -R 
 bc.
