@@ -47,16 +47,18 @@ h2. Docker Compose
 Auf den Installationssystemen läuft Docker Compose.
 Mit den bekannten Befehlen können die Docker Container beobachtet/besucht werden.
 
-bc.. 
+<pre> 
 docker ps
 docker container exec -it ompprod_app_ulb /bin/sh
 docker container exec -it ompdev_app_ulb /bin/sh
-bc. 
+</pre> 
 
 
 Installationsroot befindet sich jeweils in:
-OMS:  @/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-omp@
-OJS: @/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-ojs@
+* OMS:  @/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-omp@
+* OJS: @/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-ojs@
+
+
 Hier befinden sich die ausführbaren Scripte: @start-omp, stop-omp@ bzw. @start-ojs, stop-ojs@ 
 Diese kapseln nur den längeren @docker-compose@ Aufruf und velangen die Parameter _dev_ bzw. _prod_
 Mit jedem push ins ULB-gitlab (ojs/omp) des ITZ, startet eine CI/CD pipeline.
@@ -90,27 +92,27 @@ Da diese Ordner/Unterordner von den Containern eingebunden werden, sollten diese
 
 Im Application (OMP) container _ompprod_app_ulb_
 
-bc..
+<pre>
 id apache   
 uid=100(apache) gid=101(apache) groups=101(apache),82(www-data),101(apache)
-bc.
+</pre>
 
 
 Im Database (MariaDb) container ompprod_db_ulb
 
-bc..
+<pre>
 id mysql  
 uid=999(mysql) gid=999(mysql) groups=999(mysql)
-bc.
+</pre>
 
 
 also:
 
-bc..
+<pre>
 sudo chown 100:100  /data/ompprod/ -R
 sudo chown 999:999  /data/ompprod/logs/db -R 
 sudo chown 999:999  /data/ompprod/db -R 
-bc.
+</pre>
 
 
 h2. Backup
