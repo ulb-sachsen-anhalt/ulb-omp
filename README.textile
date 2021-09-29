@@ -15,7 +15,7 @@ Develop: "publicdev.bibliothek.uni-halle.de":https://publicdev.bibliothek.uni-ha
 - ojs (KeyPass)
 - amuyf (A. Bauer ULB) | - Ubuntu 18.04.5 LTS (Bionic Beaver)
 - Samba-Share für alle Daten inkl. DB @/data@ (im Backupsystem)
-- Docker 
+- Docker-Compose 
 - gitlab-runner |
 |^. OMP |^. Produktion: "omp.bibliothek.uni-halle.de":https://omp.bibliothek.uni-halle.de
 Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de | SSH
@@ -24,7 +24,7 @@ Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de
 - amuyf (A. Bauer ULB) 
 | - Ubuntu 20.04.3 LTS (Focal Fossa)
 - Samba-Share für alle Daten inkl. DB @/data@ (im Backupsystem)
-- Docker 
+- Docker-Compose 
 - gitlab-runner |
 
 
@@ -44,7 +44,7 @@ h2. Quellcode CI/CD Installationssystem
 
 h2. Docker Compose
 
-Auf den Installationssystem läuft Docker Compose.
+Auf den Installationssystemen läuft Docker Compose.
 Mit den bekannten Befehlen können die Docker Container beobachtet/besucht werden.
 
 bc.. 
@@ -60,18 +60,15 @@ OJS: @/home/gitlab-runner/builds/<build_id>/0/ulb/ulb-ojs@
 Hier befinden sich die ausführbaren Scripte: @start-omp, stop-omp@ bzw. @start-ojs, stop-ojs@ 
 Diese kapseln nur den längeren @docker-compose@ Aufruf und velangen die Parameter _dev_ bzw. _prod_
 Mit jedem push ins ULB-gitlab (ojs/omp) des ITZ, startet eine CI/CD pipeline.
-Der gitlab-runner auf dem Installationssystem checkt die Aktualisierungen aus
-und startet die Container neu mit den entsprechenden Anpassungen.
+Der gitlab-runner auf dem Installationssystem checkt die Aktualisierungen aus und startet die Container neu mit den entsprechenden Anpassungen.
 Im ersten Schritt startet das Development System neu. Siehe: _.gitlab-ci.yml_
 Sollte es Probleme geben, bleibt das Produktionssystem weiterhin aktiv und wird nicht neu gestartet.
-Die Pipline im Gitlab scheitert; Fehler können behoben werden.
+Die CI/CD Pipline scheitert; Fehler können behoben werden.
 Um den Aufbau vom _dev_ und _prod_ System zu verstehen, muss das @./build.sh@ Script untersucht werden.
 Grundsätzlich sind beide Systeme identisch. Sie haben nur eine eigene getrennte Datenbasis in @/data@.
-Beim Bau wird von der _docker-compose-{omp/ojs}prod.yml_ eine Kopie _docker-compose-{omp/ojs}dev.yml_ erstellt
-und mit @sed@ die _volumes_ und _ports_ angepasst.
+Beim Bau wird von der @docker-compose-{omp/ojs}prod.yml@ eine Kopie @docker-compose-{omp/ojs}dev.yml@ erstellt und mit @sed@ die _volumes_ und _ports_ angepasst.
 Die Develop Container haben gar keine Ports nach außen geöffnet. 
-Den kompletten Traffic nimmt der Produktions Container entgegen und leitet ihn über ein Docker network an den 
-Develop Container weiter. 
+Den kompletten Traffic nimmt der Produktions Container entgegen und leitet ihn über ein Docker network an den Develop Container weiter. 
 Der Develop Container ist also ohne laufenden Produktions Container nicht erreichbar!
 Die Weiterleitung übernimmt Apache (ProxyPass) mit den Configurationsfiles in @./resources/*.conf@
 Weitere grundsätzliche Einstellungen (Email/PWD, etc.) befinden sich in den Dateien
@@ -88,7 +85,7 @@ Beispiele für OMP (OJS analog)
 @/data/ompprod@
 @/data/ompdev@
 
-Die Besitzer hier entsprechen den uid/gid im velinkten Container.
+Die Besitzer hier, entsprechen den uid/gid im velinkten Container.
 Da diese Ordner/Unterordner von den Containern eingebunden werden, sollten diese Rechte analog gesetzt werden:
 
 Im Application (OMP) container _ompprod_app_ulb_
@@ -107,8 +104,19 @@ uid=999(mysql) gid=999(mysql) groups=999(mysql)
 bc.
 
 
+also:
+
 bc..
 sudo chown 100:100  /data/ompprod/ -R
 sudo chown 999:999  /data/ompprod/logs/db -R 
 sudo chown 999:999  /data/ompprod/db -R 
 bc.
+
+
+h2. Backup
+
+Alle Notwendigen Daten, die zum Betrieb von OMP/OJS notwendig sind, befinden sich sich im Verzeichnis @/data@.
+Das Verzeichnis ist in der Bandsicherung der ITZ.
+Mit dem Data Verzeichnis und dem GIT Repo, läßt sich das komplette System neu erstellen.
+Bei jeder Aktualisierung, die ja das build Script aufruft, wird ein Datenbankdump in @/data@ abgelegt.
+Für das OJS System läuft ein Cronjob, der das @/data@ Verzeichnis packt und auf den OMP Server kopiert.
