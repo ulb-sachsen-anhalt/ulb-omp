@@ -84,14 +84,12 @@ docker network inspect $compose_network >/dev/null 2>&1 || \
 
 echo try starting docker-compose with docker-compose-omp"$TARGET".yml
 
-./stop-omp "$TARGET"
-./start-omp "$TARGET"
 
 # backup database
 if [ "$TARGET" == "prod" ]; then
-    backup=$data_dir/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_ojs
-    echo dump OJS database "$backup.sql"
-    docker exec omp$TARGET_db_ulb mysqldump -p${OMP_DB_PASSWORD} ojs > $backup && \
+    backup=$data_dir/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_omp
+    echo dump OMP database "$backup.sql"
+    docker exec omp"$TARGET"_db_ulb mysqldump -p${OMP_DB_PASSWORD} ojs > $backup && \
         echo "backup successfull: $(du -h $backup) && mv $backup $backup.sql" || \
         if [ -f "$backup" ]; then 
             rm "$backup"
@@ -99,4 +97,5 @@ if [ "$TARGET" == "prod" ]; then
         fi
 fi
 
-
+./stop-omp "$TARGET"
+./start-omp "$TARGET"
