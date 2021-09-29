@@ -118,5 +118,5 @@ h2. Backup
 Alle Notwendigen Daten, die zum Betrieb von OMP/OJS notwendig sind, befinden sich sich im Verzeichnis @/data@.
 Das Verzeichnis ist in der Bandsicherung der ITZ.
 Mit dem Data Verzeichnis und dem GIT Repo, läßt sich das komplette System neu erstellen.
-Bei jeder Aktualisierung, die ja das build Script aufruft, wird ein Datenbankdump in @/data@ abgelegt.
+Bei jeder Aktualisierung, die ja das @build.sh@ Script aufruft, wird ein Datenbankdump in @/data/ompprod/sqldumps@ abgelegt.
 Für das OJS System läuft ein Cronjob, der das @/data@ Verzeichnis packt und auf den OMP Server kopiert.
