@@ -1,3 +1,7 @@
+# OMP Server ULB
+
+[![pipeline status](https://git.itz.uni-halle.de/ulb/ulb-omp/badges/master/pipeline.svg)](https://git.itz.uni-halle.de/ulb/ulb-omp/badges/master/pipeline.svg)
+
 https://github.com/pkp/docker-ojs
 
 OMP Daten in
