@@ -20,8 +20,7 @@ Develop: "publicdev.bibliothek.uni-halle.de":https://publicdev.bibliothek.uni-ha
 Develop: "ompdev.bibliothek.uni-halle.de":https://ompdev.bibliothek.uni-halle.de | SSH
 - syssc (Thomas Zimmermann ITZ)
 - omp (KeyPass)
-- amuyf (A. Bauer ULB) 
-| - Ubuntu 20.04.3 LTS (Focal Fossa)
+- amuyf (A. Bauer ULB) | - Ubuntu 20.04.3 LTS (Focal Fossa)
 - Samba-Share für alle Daten inkl. DB _/data_ (im Backupsystem)
 - Docker 
 - gitlab-runner |
