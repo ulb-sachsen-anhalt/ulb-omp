@@ -86,7 +86,7 @@ docker network inspect $compose_network >/dev/null 2>&1 || \
 if [ "$TARGET" == "prod" ]; then
     backup=$data_dir/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_omp
     echo dump OMP database "$backup.sql"
-    docker exec omp"$TARGET"_db_ulb mysqldump -p${OMP_DB_PASSWORD} ojs > $backup && \
+    docker exec omp"$TARGET"_db_ulb mysqldump -p${MYSQL_ROOT_PASSWORD} omp > $backup && \
         echo "backup successfull: $(du -h $backup) && mv $backup $backup.sql" || \
         if [ -f "$backup" ]; then 
             rm "$backup"
