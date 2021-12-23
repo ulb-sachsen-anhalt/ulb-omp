@@ -17,7 +17,7 @@ TARGET=$3
 # most vars in .env
 source .env
 
-if  [ -z "$TARGET" ] || {[ "$TARGET" != "dev" ] && [ "$TARGET" != "prod" ]}
+if  [ -z "$TARGET" ] || ([ "$TARGET" != "dev" ] && [ "$TARGET" != "prod" ])
     then
         echo "Third parameter 'dev' or 'prod' missing!"
         exit 0
