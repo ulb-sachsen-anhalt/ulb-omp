@@ -77,6 +77,7 @@ ENV PHP_EXTENSIONS	\
 	php7-xmlwriter	\
 	php7-zip		\
 	# ulb optional installed
+	php7-gd			\   
 	php7-xsl		\
 	php7-zlib
 
