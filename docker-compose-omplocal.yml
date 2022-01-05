@@ -1,0 +1,71 @@
+# File: docker-compose.yml
+# Access via "https://omp.bibliothek.uni-halle.de"
+#
+# Call example:
+# $ docker-compose -f docker-compose-ompdev-ulb.yml up
+
+version: "3.6"
+
+networks:
+  inside:
+    external: false
+  omp:  
+    external: true 
+
+services:
+  db:
+    image: mariadb:10.2
+    # see https://hub.docker.com/_/mariadb
+    env_file:
+      - .env
+    container_name: "ompdev_db_ulb"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    volumes:
+      - /data/ompdev/db:/var/lib/mysql
+      - /data/ompdev/logs/db:/var/log/mysql
+      - ./resources/my.cnf:/etc/mysql/conf.d/charset.cnf
+#      - ./volumes/migration:/docker-entrypoint-initdb.d
+    networks:
+      - inside
+    restart: always
+
+  ompdev:
+    image: omp-ulb:${OMP_VERSION_ULB_DEV}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USE_VERSION: "${OMP_VERSION_ULB_DEV}"
+    env_file:
+      - .env
+    container_name: "ompdev_app_ulb"
+    hostname: "${COMPOSE_PROJECT_NAME}"
+    restart: always
+    ports:
+      - "80:80"    
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - /data/ompdev/files:/var/www/files
+      - /data/ompdev/public:/var/www/html/public
+      - /data/ompdev/logs/app:/var/log/apache2
+      - /data/ompdev/config/omp.config.inc.php:/var/www/html/config.inc.php
+      - /data/ompdev/config/ompdev.conf:/etc/apache2/conf.d/omp.conf
+#      - /data/ompdev/config/ssl/omp.pem:/etc/ssl/apache2/server.pem:ro
+#      - /data/ompdev/config/ssl/omp.key:/etc/ssl/apache2/server.key:ro
+      - /data/ompdev/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
+      - /data/ompdev/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
+      - /data/ompdev/config/locale/de_DE/default.po:/var/www/html/locale/de_DE/default.po
+      - /data/ompdev/config/locale/de_DE/author.po:/var/www/html/locale/de_DE/author.po
+#      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
+#      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
+
+    networks:
+      - inside
+      - omp      
+    depends_on:
+      - db
+    restart: always
