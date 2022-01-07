@@ -5,96 +5,92 @@ set -e
 if [ $# -eq 0 ]
   then
     echo "Please pass: 
-            - root password for mysqldump, (e.g. *omp*)
-            - password SMTP (e.g. *arbitrary*)
-            - docker-compose project-name  (*dev* or *prod*) "
+            - password SMTP (e.g. *arbitrary*)"
 fi
 
-DB_PASS=$1
-SMTP_PASS=$2
-TARGET=$3
+DB_PASS="omp"
+SMTP_PASS=$1
 
 # most vars in .env
 source .env
 
-if  [ -z "$TARGET" ] || ([ "$TARGET" != "dev" ] && [ "$TARGET" != "prod" ])
-    then
-        echo "Third parameter 'dev' or 'prod' missing!"
-        exit 0
-elif [ "$TARGET" == "dev" ]
-    then
-        data_dir=${PROJECT_DATA_ROOT_DEV}
-        echo "We are using omp  Version: ${OMP_VERSION_ULB_PROD}"
-elif [ "$TARGET" == "prod" ]
-    then
-        data_dir=${PROJECT_DATA_ROOT_PROD}
-        echo "We are using omp  Version: ${OMP_VERSION_ULB_DEV}"
-fi
-
 # root data dir (mounted 500Gb volume /data)
-echo "OMP data are in $data_dir/*"
 
-[ -d "$data_dir" ] && echo "Data Directory $data_dir exists!"
+PRODUCTION=${PROJECT_DATA_ROOT_PROD}
+DEVELOP=${PROJECT_DATA_ROOT_DEV}
 
+echo "OMP data are in $PRODUCTION and $DEVELOP"
+
+[ -d "$PRODUCTION" ] && echo "Data Directory $PRODUCTION exists!"
+[ -d "$DEVELOP" ] && echo "Data Directory $DEVELOP exists!"
 
 # please create mapped folders initially! 
-# see mapped volumes in docker-compose-omp-ulb.yml
+# see mapped volumes in docker-composeprod-ulb.yml
 # ------------------------------------------------
 
-# place omp.config.inc.php file
+# copy omp.config.inc.php file
 echo propagate new version of \"omp.config.inc.php\"
-cp -v ./resources/omp.config.inc.php $data_dir/config/
+cp -v ./resources/omp.config.inc.php $PRODUCTION/config/
+cp -v ./resources/omp.config.inc.php $DEVELOP/config/
 
-if [ "$TARGET" == "prod" ]; then
-    sed -i "s/mail_password/$SMTP_PASS/" $data_dir/config/omp.config.inc.php
-fi
+# copy our custom settings in php.custom.ini (increase memory_limit)
+cp -v ./resources/php.ulb.ini $PRODUCTION/config/
+cp -v ./resources/php.ulb.ini $DEVELOP/config/
 
-# place Apache configuration file for VirtualHost 
-cp -v ./resources/omp$TARGET.conf $data_dir/config/
+# copy favicon
+cp -v ./resources/favicon.ico $PRODUCTION/config/favicon.ico
+cp -v ./resources/favicon.ico $DEVELOP/config/favicon.ico
 
+# copy ULB specific plugins 
+cp -r ./plugins/* $PRODUCTION/plugins/
+cp -r ./plugins/* $DEVELOP/plugins/
+
+sed -i "s/mail_password/$SMTP_PASS/" $PRODUCTION/config/omp.config.inc.php
+
+# copy Apache configuration file for VirtualHost 
+cp -v ./resources/ompdev.conf $DEVELOP/config/
+cp -v ./resources/omplocal.conf $DEVELOP/config/
+cp -v ./resources/ompprod.conf $PRODUCTION/config/
 
 # replace Host variable if in development build
-if [ "$TARGET" == "dev" ]; then
-    cp -v ./resources/ompdev.conf "$data_dir"/config/
-    echo "reconfigure config file with sed: omp.config.inc.php"
-    sed -i "s/ompprod_db_ulb/ompdev_db_ulb/" "$data_dir"/config/omp.config.inc.php
-    echo "copy and reconfigure compose file with sed: docker-compose-ompdev.yml"
-    cp -v ./docker-compose-ompprod.yml ./docker-compose-ompdev.yml
-    echo "sed data in docker-compose-ompdev.yml for develop server"
-    sed -i "s/ompprod/ompdev/g" ./docker-compose-ompdev.yml
-    
-    # do not expose any port
-    sed -i "/ports:/d" ./docker-compose-ompdev.yml
-    sed -i "/80:80/d" ./docker-compose-ompdev.yml
-    sed -i "/443:443/d" ./docker-compose-ompdev.yml
-    # sed -i "s/80:80/8080:80/" ./docker-compose-ompdev.yml
-    # sed -i "s/443:443/8443:443/" ./docker-compose-ompdev.yml
-    
-    sed -i "s/OMP_VERSION_ULB_PROD/OMP_VERSION_ULB_DEV/" ./docker-compose-ompdev.yml
-fi
+
+cp -v ./resources/ompdev.conf "$DEVELOP"/config/
+echo "reconfigure config file with sed: omp.config.inc.php"
+sed -i "s/ompprod_db_ulb/ompdev_db_ulb/" "$DEVELOP"/config/omp.config.inc.php
+sed -i "s/force_ssl/;force_ssl/" "$DEVELOP"/config/omp.config.inc.php
+sed -i "s/force_login_ssl/;force_login_ssl/" "$DEVELOP"/config/omp.config.inc.php
+echo "copy and reconfigure compose file with sed: docker-compose-ompdev.yml"
+cp -v ./docker-compose-ompprod.yml ./docker-compose-ompdev.yml
+echo "sed data in docker-compose-ompdev.yml for develop server"
+sed -i "s/ompprod/ompdev/g" ./docker-compose-ompdev.yml
+sed -i "s/OMP_VERSION_ULB_PROD/OMP_VERSION_ULB_DEV/" ./docker-compose-ompdev.yml
+cp -v ./docker-compose-ompdev.yml ./docker-compose-omplocal.yml
+# do not expose any port in dev (but in devlocal keep Port:80)
+sed -i "/443:443/d" ./docker-compose-ompdev.yml
+sed -i "/ports:/d" ./docker-compose-ompdev.yml
+sed -i "/80:80/d" ./docker-compose-ompdev.yml
+# for local development we don't need ssl  
+sed -i "/443:443/d" ./docker-compose-omplocal.yml
+sed -i "/ssl/d" ./docker-compose-omplocal.yml
+sleep 1
+sed -i "s/ompdev\.conf/omplocal\.conf/" ./docker-compose-omplocal.yml
 
 echo propagate new version of \"manager.po\"
-cp -v ./locale/*.po "$data_dir"/config/locale/de_DE/
-
-compose_network=omp
-
-docker network inspect $compose_network >/dev/null 2>&1 || \
-    docker network create $compose_network
+cp -v ./locale/*.po "$DEVELOP"/config/locale/de_DE/
+cp -v ./locale/*.po "$PRODUCTION"/config/locale/de_DE/
 
 
 # backup database
-if [ "$TARGET" == "prod" ]; then
-    backup=$data_dir/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_omp
-    echo dump OMP database "$backup.sql"
-    docker exec omp"$TARGET"_db_ulb mysqldump -p${MYSQL_ROOT_PASSWORD} omp > $backup && \
-        echo "backup successfull: $(du -h $backup) && mv $backup $backup.sql" || \
-        if [ -f "$backup" ]; then 
-            rm "$backup"
-            echo "backup failed, delete empty dump"
-        fi
-fi
 
-echo try starting docker-compose with docker-compose-omp"$TARGET".yml
+backup=$PRODUCTION/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_omp
+echo dump OMP database "$backup.sql"
+docker exec ompprod_db_ulb mysqldump -p${MYSQL_ROOT_PASSWORD} omp > $backup && \
+    echo "backup successfull: $(du -h $backup) && mv $backup $backup.sql" || \
+    if [ -f "$backup" ]; then 
+        rm "$backup"
+        echo "backup failed, delete empty dump"
+    fi
 
-./stop-omp "$TARGET"
-./start-omp "$TARGET"
+echo you can now start omp with
+echo "./start_omp {prod|dev|local}" 
+
