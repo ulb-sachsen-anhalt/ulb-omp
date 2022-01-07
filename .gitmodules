@@ -1,0 +1,6 @@
+[submodule "ulb-ojs"]
+	path = ulb-ojs
+	url = git@git.itz.uni-halle.de:ulb/ulb-ojs.git
+[submodule "plugins/setRemoteUrlPlugin"]
+	path = plugins/setRemoteUrlPlugin
+	url = git@git.itz.uni-halle.de:ulb/setRemoteUrlPlugin.git
