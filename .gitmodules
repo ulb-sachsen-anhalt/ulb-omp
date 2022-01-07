@@ -1,6 +1,12 @@
-[submodule "ulb-ojs"]
-	path = ulb-ojs
-	url = git@git.itz.uni-halle.de:ulb/ulb-ojs.git
 [submodule "plugins/setRemoteUrlPlugin"]
 	path = plugins/setRemoteUrlPlugin
 	url = git@git.itz.uni-halle.de:ulb/setRemoteUrlPlugin.git
+[submodule "plugins/searchmarkplugin"]
+	path = plugins/searchmarkplugin
+	url = git@git.itz.uni-halle.de:ulb/searchmarkplugin.git
+[submodule "plugins/ulb-theme"]
+	path = plugins/ulb-theme
+	url = git@git.itz.uni-halle.de:ulb/ulb-theme.git
+[submodule "plugins/searchMarkPlugin"]
+	path = plugins/searchMarkPlugin
+	url = git@git.itz.uni-halle.de:ulb/searchMarkPlugin.git

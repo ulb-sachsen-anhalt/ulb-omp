@@ -54,6 +54,7 @@ services:
       - /data/ompprod/public:/var/www/html/public
       - /data/ompprod/logs/app:/var/log/apache2
       - /data/ompprod/config/omp.config.inc.php:/var/www/html/config.inc.php
+      - /data/ompprod/config/php.ulb.ini:/etc/php7/conf.d/php.ulb.ini:ro
       - /data/ompprod/config/ompprod.conf:/etc/apache2/conf.d/omp.conf
       - /data/ompprod/config/ssl/omp.pem:/etc/ssl/apache2/server.pem:ro
       - /data/ompprod/config/ssl/omp.key:/etc/ssl/apache2/server.key:ro
@@ -61,6 +62,12 @@ services:
       - /data/ompprod/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
       - /data/ompprod/config/locale/de_DE/default.po:/var/www/html/locale/de_DE/default.po
       - /data/ompprod/config/locale/de_DE/author.po:/var/www/html/locale/de_DE/author.po
+      # ULB custom made plugins
+      - /data/ompprod/plugins/ulb_theme:/var/www/html/plugins/themes/ulb_theme
+      - /data/ompprod/plugins/searchMarkPlugin:/var/www/html/plugins/generic/searchMarkPlugin
+      - /data/ompprod/plugins/setRemoteUrlPlugin:/var/www/html/plugins/generic/setRemoteUrlPlugin
+      - /data/ompprod/config/favicon.ico:/var/www/html/favicon.ico
+
 #      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
 #      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
