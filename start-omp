@@ -19,11 +19,11 @@ elif [ $1 == "dev" ] || [ "$1" == "local" ]
         fi       
         echo start docker-compose "$1"
         docker-compose -f docker-compose-omp"$1".yml -p "$1" up -d
-        docker network connect $compose_network ojsdev_app_ulb
+        docker network connect $compose_network ompdev_app_ulb
 
 elif [ $1 == "prod" ]
     then
         echo start docker-compose production
         docker-compose -f docker-compose-ompprod.yml -p "$1" up -d
-        docker network connect $compose_network ojsprod_app_ulb
+        docker network connect $compose_network ompprod_app_ulb
 fi
