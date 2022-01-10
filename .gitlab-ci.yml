@@ -16,6 +16,7 @@ builddev-job:
   script:
     - echo "Install OMP DEVELOP"
     - ./build.sh omp omp
+    - ./stop-omp dev
     - ./start-omp dev
 
 
@@ -32,5 +33,6 @@ build-job:
   script:
     - echo "Install OMP PRODUCTION"
     - ./build.sh  omp omp
+    - ./stop-omp prod
     - ./start-omp prod
 
