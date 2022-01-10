@@ -8,7 +8,6 @@ if [ $# -eq 0 ]
             - password SMTP (e.g. *arbitrary*)"
 fi
 
-DB_PASS="omp"
 SMTP_PASS=$1
 
 # most vars in .env
@@ -76,8 +75,8 @@ sleep 1
 sed -i "s/ompdev\.conf/omplocal\.conf/" ./docker-compose-omplocal.yml
 
 echo propagate new version of \"manager.po\"
-cp -v ./locale/*.po "$DEVELOP"/config/locale/de_DE/
-cp -v ./locale/*.po "$PRODUCTION"/config/locale/de_DE/
+cp -v ./locale/de_DE/*.po "$DEVELOP"/config/locale/de_DE/
+cp -v ./locale/de_DE/*.po "$PRODUCTION"/config/locale/de_DE/
 
 
 # backup database
@@ -92,5 +91,5 @@ docker exec ompprod_db_ulb mysqldump -p${MYSQL_ROOT_PASSWORD} omp > $backup && \
     fi
 
 echo you can now start omp with
-echo "./start_omp {prod|dev|local}" 
+echo "./start-omp {prod|dev|local}" 
 
