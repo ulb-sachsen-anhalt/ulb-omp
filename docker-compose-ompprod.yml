@@ -9,8 +9,6 @@ version: "3.6"
 networks:
   inside:
     external: false
-  omp:  
-    external: true 
 
 services:
   db:
@@ -70,7 +68,6 @@ services:
 
     networks:
       - inside
-      - omp      
     depends_on:
       - db
     restart: always
