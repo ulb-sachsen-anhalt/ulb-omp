@@ -15,13 +15,13 @@ elif [ $1 == "dev" ] || [ "$1" == "local" ]
     then
         if [ "$1" == "local" ]; then
             source .env
-            cp -v ./resources/omplocal.conf ${PROJECT_DATA_ROOT_DEV}/config/
+            cp -v ./resources/omplocal.conf "${PROJECT_DATA_ROOT_DEV}"/config/
         fi       
-        echo start docker-compose $1
-        docker-compose -f docker-compose-omp$1.yml -p $1 up -d
+        echo start docker-compose "$1"
+        docker-compose -f docker-compose-omp"$1".yml -p "$1" up -d
 
 elif [ $1 == "prod" ]
     then
         echo start docker-compose production
-        docker-compose -f docker-compose-ompprod.yml -p $1 up -d
+        docker-compose -f docker-compose-ompprod.yml -p "$1" up -d
 fi
