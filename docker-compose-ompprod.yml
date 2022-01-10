@@ -58,12 +58,9 @@ services:
       - /data/ompprod/config/ompprod.conf:/etc/apache2/conf.d/omp.conf
       - /data/ompprod/config/ssl/omp.pem:/etc/ssl/apache2/server.pem:ro
       - /data/ompprod/config/ssl/omp.key:/etc/ssl/apache2/server.key:ro
-      - /data/ompprod/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
-      - /data/ompprod/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
-      - /data/ompprod/config/locale/de_DE/default.po:/var/www/html/locale/de_DE/default.po
-      - /data/ompprod/config/locale/de_DE/author.po:/var/www/html/locale/de_DE/author.po
+      - /data/ompprod/config/locale/de_DE:/var/www/html/locale/de_DE
       # ULB custom made plugins
-      - /data/ompprod/plugins/ulb_theme:/var/www/html/plugins/themes/ulb_theme
+      - /data/ompprod/plugins/ulb-theme:/var/www/html/plugins/themes/ulb-theme
       - /data/ompprod/plugins/searchMarkPlugin:/var/www/html/plugins/generic/searchMarkPlugin
       - /data/ompprod/plugins/setRemoteUrlPlugin:/var/www/html/plugins/generic/setRemoteUrlPlugin
       - /data/ompprod/config/favicon.ico:/var/www/html/favicon.ico
