@@ -30,7 +30,6 @@ build-job:
 
   script:
     - echo "Install OMP PRODUCTION"
-    - ./build.sh
     - ./stop-omp prod
     - ./start-omp prod
 
