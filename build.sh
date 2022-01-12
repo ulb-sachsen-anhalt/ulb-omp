@@ -84,7 +84,7 @@ cp -v ./locale/de_DE/*.po "$PRODUCTION"/config/locale/de_DE/
 backup=$PRODUCTION/sqldumps/$(date +"%Y-%m-%d")_${OMP_VERSION_ULB_PROD}_omp
 echo dump OMP database "$backup.sql"
 docker exec ompprod_db_ulb mysqldump -p${MYSQL_ROOT_PASSWORD} omp > $backup && \
-    echo "backup successfull: $(du -h $backup) && mv $backup $backup.sql" || \
+    echo "backup successfull: $(du -h $backup)" && mv $backup $backup.sql || \
     if [ -f "$backup" ]; then 
         rm "$backup"
         echo "backup failed, delete empty dump"
