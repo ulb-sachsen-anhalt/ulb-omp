@@ -48,7 +48,7 @@ services:
       - "443:443"
     volumes:
       - /etc/localtime:/etc/localtime
-      - /data/ompprod/files:/var/www/files
+      - /data/ompprod/private/files:/var/www/files
       - /data/ompprod/public:/var/www/html/public
       - /data/ompprod/logs/app:/var/log/apache2
       - /data/ompprod/config/omp.config.inc.php:/var/www/html/config.inc.php
