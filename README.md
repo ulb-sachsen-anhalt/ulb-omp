@@ -55,7 +55,7 @@ sudo chown 999:999  /data/ompdev/db -R
 From your clone directory start ```./build.sh```
 
 This will setup all data for you to start docker container in _developent, production_ or _local_ mode.
-(There ist some work if you start form scratch for sure.)
+(There is probably some extra work if you start form scratch.)
 
 To start container use start and stop scripts:
 ```
