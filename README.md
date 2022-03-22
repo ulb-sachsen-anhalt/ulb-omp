@@ -18,7 +18,7 @@ Our data for (dev)Server and Database containers is located here:
 
 First we need to create all directories, 
 referenced as volume form _docker-compose-ompdev.yml_
-```
+```bash
 /data/ompdev/config
 /data/ompdev/db
 /data/ompdev/files
@@ -35,22 +35,22 @@ _uid_ and _gid_ of directories should correspondent within the container ids
 
 
 e.g.: container omp_app_ulb
-<pre>
+```bash
  >id apache   
  >uid=100(apache) gid=101(apache) groups=101(apache),82(www-data),101(apache)
-</pre>
+```
 container omp_dbdev_ulb:
-<pre>
+```bash
  >id mysql  
  >uid=999(mysql) gid=999(mysql) groups=999(mysql)
-</pre>
+```
 
 So set appropriate on host machine:
-<pre>
+```bash
 sudo chown 100:100  /data/ompdev/ -R
 sudo chown 999:999  /data/ompdev/logs/db -R 
 sudo chown 999:999  /data/ompdev/db -R 
-</pre>
+```
 
 From your clone directory start ```./build.sh```
 
@@ -58,13 +58,16 @@ This will setup all data for you to start docker container in _developent, produ
 (There is probably some extra work if you start form scratch.)
 
 To start container use start and stop scripts:
-```
+```bash
 ./start-omp local
 ./stop-omp local
 ```
 
 Please check _.env_ for further settings!
 
+## License
+
+GPL3
 
 
 
