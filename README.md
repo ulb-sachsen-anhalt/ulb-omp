@@ -1,9 +1,10 @@
 # OMP Server ULB
 
-[![pipeline status](/ulb/ulb-omp/badges/master/pipeline.svg)](/ulb/ulb-omp/badges/master/pipeline.svg)
+[![pipeline status](https://git.itz.uni-halle.de/ulb/ulb-ojs/badges/master/pipeline.svg)](https://git.itz.uni-halle.de/ulb/ulb-ojs/badges/master/pipeline.svg)
 
 
-## Enviroments setup for OMP Docker @ULB 
+
+## Enviroments setup for OMP Docker __ULB__ 
 
 Source of OMP: https://github.com/pkp/docker-ojs
 
