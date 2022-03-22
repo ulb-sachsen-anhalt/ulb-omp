@@ -36,13 +36,13 @@ _uid_ and _gid_ of directories should correspondent within the container ids
 
 e.g.: container omp_app_ulb
 ```bash
- >id apache   
- >uid=100(apache) gid=101(apache) groups=101(apache),82(www-data),101(apache)
+ $ id apache   
+ uid=100(apache) gid=101(apache) groups=101(apache),82(www-data),101(apache)
 ```
 container omp_dbdev_ulb:
 ```bash
- >id mysql  
- >uid=999(mysql) gid=999(mysql) groups=999(mysql)
+ $id mysql  
+ uid=999(mysql) gid=999(mysql) groups=999(mysql)
 ```
 
 So set appropriate on host machine:
