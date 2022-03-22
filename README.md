@@ -4,9 +4,10 @@
 
 
 
-## Enviroments setup for OMP Docker __ULB__ 
+## Enviroment setup for OMP Docker [ULB](https://omp.bibliothek.uni-halle.de/)
 
-Source of OMP: https://github.com/pkp/docker-ojs
+There is no docker setup from PKP yet.
+So we build our own Dockerfile, inspired be OJS-Docker. -> https://github.com/pkp/docker-ojs
 
 
 Our data for (dev)Server and Database containers is located here:
