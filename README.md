@@ -41,7 +41,7 @@ e.g.: container omp_app_ulb
 ```
 container omp_dbdev_ulb:
 ```bash
- $id mysql  
+ $ id mysql  
  uid=999(mysql) gid=999(mysql) groups=999(mysql)
 ```
 
