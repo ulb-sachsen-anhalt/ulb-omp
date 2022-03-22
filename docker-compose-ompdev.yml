@@ -26,7 +26,6 @@ services:
       - /data/ompdev/db:/var/lib/mysql
       - /data/ompdev/logs/db:/var/log/mysql
       - ./resources/my.cnf:/etc/mysql/conf.d/charset.cnf
-#      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
       - inside
     restart: always
@@ -43,23 +42,22 @@ services:
     container_name: "ompdev_app_ulb"
     hostname: "${COMPOSE_PROJECT_NAME}"
     restart: always
-    ports:
-      - "8080:80"
-      - "8443:443"
     volumes:
       - /etc/localtime:/etc/localtime
-      - /data/ompdev/files:/var/www/files
+      - /data/ompdev/private/files:/var/www/files
       - /data/ompdev/public:/var/www/html/public
       - /data/ompdev/logs/app:/var/log/apache2
       - /data/ompdev/config/omp.config.inc.php:/var/www/html/config.inc.php
+      - /data/ompdev/config/php.ulb.ini:/etc/php7/conf.d/php.ulb.ini:ro
       - /data/ompdev/config/ompdev.conf:/etc/apache2/conf.d/omp.conf
-#      - /data/ompdev/config/ssl/omp.pem:/etc/ssl/apache2/server.pem:ro
-#      - /data/ompdev/config/ssl/omp.key:/etc/ssl/apache2/server.key:ro
-      - /data/ompdev/config/locale/de_DE/manager.po:/var/www/html/locale/de_DE/manager.po
-      - /data/ompdev/config/locale/de_DE/locale.po:/var/www/html/locale/de_DE/locale.po
-      - /data/ompdev/config/locale/de_DE/default.po:/var/www/html/locale/de_DE/default.po
-#      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
-#      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
+      - /data/ompdev/config/ssl/omp.pem:/etc/ssl/apache2/server.pem:ro
+      - /data/ompdev/config/ssl/omp.key:/etc/ssl/apache2/server.key:ro
+      - /data/ompdev/config/locale/de_DE:/var/www/html/locale/de_DE
+      # ULB custom made plugins
+      - /data/ompdev/plugins/ulb-theme:/var/www/html/plugins/themes/ulb-theme
+      - /data/ompdev/plugins/searchMarkPlugin:/var/www/html/plugins/generic/searchMarkPlugin
+      - /data/ompdev/plugins/setRemoteUrlPlugin:/var/www/html/plugins/generic/setRemoteUrlPlugin
+      - /data/ompdev/config/favicon.ico:/var/www/html/favicon.ico
 
     networks:
       - inside

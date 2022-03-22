@@ -26,7 +26,6 @@ services:
       - /data/ompprod/db:/var/lib/mysql
       - /data/ompprod/logs/db:/var/log/mysql
       - ./resources/my.cnf:/etc/mysql/conf.d/charset.cnf
-#      - ./volumes/migration:/docker-entrypoint-initdb.d
     networks:
       - inside
     restart: always
@@ -62,9 +61,6 @@ services:
       - /data/ompprod/plugins/searchMarkPlugin:/var/www/html/plugins/generic/searchMarkPlugin
       - /data/ompprod/plugins/setRemoteUrlPlugin:/var/www/html/plugins/generic/setRemoteUrlPlugin
       - /data/ompprod/config/favicon.ico:/var/www/html/favicon.ico
-
-#      - ./volumes/config/apache.htaccess:/var/www/html/.htaccess
-#      - ./volumes/php.custom.ini:/usr/local/etc/php/conf.d/custom.ini
 
     networks:
       - inside
