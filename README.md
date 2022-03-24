@@ -65,6 +65,12 @@ To start container use start and stop scripts:
 
 Please check _.env_ for further settings!
 
+## GitLab CI/CD
+
+If you are working with gitlab you can use the .```gitlab-ci.yml``` to fire up your gitlab-runner. 
+
+
+
 ## License
 
 GPL3
