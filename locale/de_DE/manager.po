@@ -1018,6 +1018,9 @@ msgstr "Die URL der Verlagshomepage"
 msgid "emailTemplate.variable.context.contextName"
 msgstr "Der Name des Verlags"
 
+msgid "manager.setup.contextName"
+msgstr "Journal Name"
+
 msgid "plugins.importexport.chapter.exportFailed"
 msgstr "Das Parsen der Kapitel hat nicht funktioniert"
 
