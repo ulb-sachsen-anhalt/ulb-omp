@@ -8,7 +8,7 @@ docker network inspect $compose_network >/dev/null 2>&1 || \
 
 if  [ -z "$1" ] || ([ $1 != "dev" ] && [ $1 != "prod" ] && [ $1 != "local" ])
     then
-        echo "Parameter 'dev' or 'prod' or 'local' missing"
+        echo "parameter 'dev' or 'prod' or 'local' missing"
         exit 0
 
 elif [ $1 == "dev" ] || [ "$1" == "local" ]
@@ -19,7 +19,7 @@ elif [ $1 == "dev" ] || [ "$1" == "local" ]
         fi       
         echo start docker-compose "$1"
         docker-compose -f docker-compose-omp"$1".yml -p "$1" up -d
-        docker network connect $compose_network ompdev_app_ulb
+        docker network connect $compose_network omp$1_app_ulb
 
 elif [ $1 == "prod" ]
     then

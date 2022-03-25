@@ -13,7 +13,6 @@ SMTP_PASS=$1
 # most vars in .env
 source .env
 
-# root data dir (mounted 500Gb volume /data)
 
 PRODUCTION=${PROJECT_DATA_ROOT_PROD}
 DEVELOP=${PROJECT_DATA_ROOT_DEV}
@@ -24,7 +23,7 @@ echo "OMP data are in $PRODUCTION and $DEVELOP"
 [ -d "$DEVELOP" ] && echo "Data Directory $DEVELOP exists!"
 
 # please create mapped folders initially! 
-# see mapped volumes in docker-composeprod-ulb.yml
+# see mapped volumes in docker-compose-ompprod.yml
 # ------------------------------------------------
 
 # copy omp.config.inc.php file
@@ -46,33 +45,36 @@ cp -r ./plugins/* $DEVELOP/plugins/
 
 sed -i "s/mail_password/$SMTP_PASS/" $PRODUCTION/config/omp.config.inc.php
 
-# copy Apache configuration file for VirtualHost 
-cp -v ./resources/ompdev.conf $DEVELOP/config/
-cp -v ./resources/omplocal.conf $DEVELOP/config/
-cp -v ./resources/ompprod.conf $PRODUCTION/config/
+# copy Apache configuration file for VirtualHost prod, dev, local
+cp -v ./resources/omp*.conf "$DEVELOP"/config/
 
 # replace Host variable if in development build
 
-cp -v ./resources/ompdev.conf "$DEVELOP"/config/
 echo "reconfigure config file with sed: omp.config.inc.php"
 sed -i "s/ompprod_db_ulb/ompdev_db_ulb/" "$DEVELOP"/config/omp.config.inc.php
 sed -i "s/force_ssl/;force_ssl/" "$DEVELOP"/config/omp.config.inc.php
 sed -i "s/force_login_ssl/;force_login_ssl/" "$DEVELOP"/config/omp.config.inc.php
 echo "copy and reconfigure compose file with sed: docker-compose-ompdev.yml"
+
 cp -v ./docker-compose-ompprod.yml ./docker-compose-ompdev.yml
 echo "sed data in docker-compose-ompdev.yml for develop server"
 sed -i "s/ompprod/ompdev/g" ./docker-compose-ompdev.yml
 sed -i "s/OMP_VERSION_ULB_PROD/OMP_VERSION_ULB_DEV/" ./docker-compose-ompdev.yml
-cp -v ./docker-compose-ompdev.yml ./docker-compose-omplocal.yml
+
 # do not expose any port in dev (but in devlocal keep Port:80)
+cp -v ./docker-compose-ompdev.yml ./docker-compose-omplocal.yml
 sed -i "/443:443/d" ./docker-compose-ompdev.yml
 sed -i "/ports:/d" ./docker-compose-ompdev.yml
 sed -i "/80:80/d" ./docker-compose-ompdev.yml
+
 # for local development we don't need ssl  
+echo "sed data in docker-compose-omplocal.yml for local development"
 sed -i "/443:443/d" ./docker-compose-omplocal.yml
 sed -i "/ssl/d" ./docker-compose-omplocal.yml
-sleep 1
 sed -i "s/ompdev\.conf/omplocal\.conf/" ./docker-compose-omplocal.yml
+sed -i "s/ompdev_app_ulb/omplocal_app_ulb/" ./docker-compose-omplocal.yml
+
+sleep 1
 
 echo propagate new version of \"manager.po\"
 cp -v ./locale/de_DE/*.po "$DEVELOP"/config/locale/de_DE/
