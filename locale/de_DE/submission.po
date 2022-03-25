@@ -126,7 +126,7 @@ msgid "submission.submit.newSubmissionMultiple"
 msgstr "Ein neues Buchmanuskript einreichen bei"
 
 msgid "submission.submit.newSubmissionSingle"
-msgstr "Ein neues Manuskript bei {$contextName} einreichen"
+msgstr "Ein neues Manuskript einreichen"
 
 msgid "submission.submit.upload"
 msgstr "Einreichung hochladen"
