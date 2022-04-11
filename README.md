@@ -1,7 +1,5 @@
 # OMP Server ULB
 
-[![pipeline status](https://git.itz.uni-halle.de/ulb/ulb-ojs/badges/master/pipeline.svg)](https://git.itz.uni-halle.de/ulb/ulb-ojs/badges/master/pipeline.svg)
-
 
 
 ## Enviroment setup for OMP Docker [ULB](https://omp.bibliothek.uni-halle.de/)
