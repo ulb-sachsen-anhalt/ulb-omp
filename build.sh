@@ -40,8 +40,8 @@ cp -v ./resources/favicon.ico $PRODUCTION/config/favicon.ico
 cp -v ./resources/favicon.ico $DEVELOP/config/favicon.ico
 
 # copy ULB specific plugins 
-cp -r ./plugins/* $PRODUCTION/plugins/
-cp -r ./plugins/* $DEVELOP/plugins/
+# cp -r ./plugins/* $PRODUCTION/plugins/
+# cp -r ./plugins/* $DEVELOP/plugins/
 
 sed -i "s/mail_password/$SMTP_PASS/" $PRODUCTION/config/omp.config.inc.php
 
