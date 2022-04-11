@@ -46,6 +46,7 @@ cp -r ./plugins/* $DEVELOP/plugins/
 sed -i "s/mail_password/$SMTP_PASS/" $PRODUCTION/config/omp.config.inc.php
 
 # copy Apache configuration file for VirtualHost prod, dev, local
+cp -v ./resources/omp*.conf "$PRODUCTION"/config/
 cp -v ./resources/omp*.conf "$DEVELOP"/config/
 
 # replace Host variable if in development build
