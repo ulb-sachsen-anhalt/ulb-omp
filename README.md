@@ -45,7 +45,7 @@ container omp_dbdev_ulb:
 
 So set appropriate on host machine:
 ```bash
-sudo chown 100:100  /data/ompdev/ -R
+sudo chown 100:101  /data/ompdev/ -R
 sudo chown 999:999  /data/ompdev/logs/db -R 
 sudo chown 999:999  /data/ompdev/db -R 
 ```
